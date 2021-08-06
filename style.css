@@ -1,0 +1,60 @@
+body{
+    background-color: #161923;
+    margin: 2px;
+    padding: 2px;
+}
+
+p, h1, h2, h3, li{
+    color: #BCBDD0;
+}
+
+li{
+    list-style-type: none;
+}
+
+a{
+    color: #2B779F;
+}
+
+td,th{
+    color: #BCBDD0;
+}
+
+.header{
+    display: flex;
+}
+
+.about-me{
+    display: flex;
+}
+
+.links{
+    display: flex;
+}
+
+.separator{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.first-block{
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-me
+
+.short-story{
+    margin-right: 20%;
+    margin-left: 10px;
+    text-align: justify;
+}
+
+.experiences{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.skills{
+    display: flex;
+}
