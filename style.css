@@ -1,60 +1,21 @@
 body{
-    background-color: #161923;
-    margin: 2px;
-    padding: 2px;
+    background-color: #282B2D;
 }
 
-p, h1, h2, h3, li{
-    color: #BCBDD0;
-}
-
-li{
-    list-style-type: none;
+p, h1, h2, h3, li, td,th{
+    color: #CCC9C3;
 }
 
 a{
-    color: #2B779F;
+    color: #EBD245;
 }
 
-td,th{
-    color: #BCBDD0;
-}
-
-.header{
-    display: flex;
-}
-
-.about-me{
-    display: flex;
-}
-
-.links{
-    display: flex;
-}
-
-.separator{
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.first-block{
-    display: flex;
-    justify-content: space-between;
-}
-
-.about-me
-
-.short-story{
-    margin-right: 20%;
-    margin-left: 10px;
-    text-align: justify;
-}
-
-.experiences{
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-.skills{
-    display: flex;
-}
+/*
+Modules color: #FFE348
+Structs color: #50D6CF
+Enums color: #A69F94
+Constants color: #84AACA
+Traits color: #BO81F1
+Functions color: #56BA82
+Type definition color: #FE8B1A
+*/
