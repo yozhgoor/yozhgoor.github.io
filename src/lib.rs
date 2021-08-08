@@ -14,75 +14,84 @@
 //! [Twitter](https://twitter.com/yozhgoor).
 //! You can also send me a [mail](mailto:yohan.boogaert@protonmail.com).
 
-/// Junior at RustMinded
-pub mod software_developer {}
+// experiences
 
-/// Volunteer at Centre de Secours Monceau
+/// Volunteer at Centre de Secours Monceau - 2020
 pub mod emergency_medical_technician {}
 
-/// Ambulance, Shuttle, Taxi,...
+/// Junior at RustMinded - Current
+pub mod software_developer {}
+
+/// Ambulance, Shuttle, Taxi,... - 2014 to 2019
 pub mod professional_driver {}
 
-/// A CLI tool that allows you to create a temporary new Rust project using
-/// cargo with already installed dependencies.
+// Personal projects
+
+/// Project - A CLI tool that allows you to create a temporary new Rust project
+/// using cargo with already installed dependencies.
 /// [site](https://github.com/rustminded/cargo-temp)
 pub struct CargoTemp {}
 
-/// My vision of the Rust Programming Language as an introduction to Rust.
-/// [site](https://github.com/yozhgoor/intro-to-rust)
+/// Project - My vision of the Rust Programming Language as an introduction to
+/// Rust. [site](https://github.com/yozhgoor/intro-to-rust)
 pub struct IntroToRust {}
 
-/// A Yew and Yewprint playground using wasmbl.
+/// Project - A Yew and Yewprint playground using wasmbl.
 /// [site](https://github.com/yozhgoor/yewprint-playground)
 pub struct YewprintPlayground {}
 
-/// Port of blueprintjs.com to Yew.
-/// [site](https://github.com/yewprint/yewprint)
-pub enum Yewprint {}
+// Projects I've been active lately
 
-/// Bundles and tooling for Rust WASM frontend application.
-/// [site](https://github.com/wasmbl/wasmbl)
-pub enum Wasmbl {}
-
-/// A CLI tool that compares a crate's public API between two different
-/// branches, shows what changed, and suggests the next version according to
-/// semver.
-/// [site](https://github.com/iomentum/cargo-breaking)
+/// Contributions - A CLI tool that compares a crate's public API between two
+/// different branches, shows what changed, and suggests the next version
+/// according to semver. [site](https://github.com/iomentum/cargo-breaking)
 pub enum CargoBreaking {}
 
-/// French translation of the book "The Rust Programming Language".
-/// [site](https://github.com/Jimskapt/rust-book-fr)
+/// Contributions - French translation of the book "The Rust Programming
+/// Language". [site](https://github.com/Jimskapt/rust-book-fr)
 pub enum RustBookFr {}
 
-/// "Third-I", the only camera that replicates your hearing and your point of
-/// view.
+/// Contributions - "Third-I", the only camera that replicates your hearing and
+/// your point ofview.
 /// [site](https://github.com/BigBoySystems/third-i-frontend)
 pub enum ThirdIFrontend {}
 
-/// French (5. Native), English (3. Minimum Professional Proficiency).
-pub const SPOKEN_LANGUAGES: (&str, &str) = ("French", "English");
+/// Contributions - Bundles and tooling for Rust WASM frontend application.
+/// [site](https://github.com/wasmbl/wasmbl)
+pub enum Wasmbl {}
 
-/// Rust, Bash.
-pub const PROGRAMMING_LANGUAGES: (&str, &str) = ("Rust", "Bash");
+/// Contributions - Port of blueprintjs.com to Yew.
+/// [site](https://github.com/yewprint/yewprint)
+pub enum Yewprint {}
+
+// Technical skills
 
 /// Yew.
 pub const FRAMEWORKS: &str = "Yew";
 
-/// Git, WASM, CLI.
-pub const TECHNOLOGIES: (&str, &str, &str) = ("Git", "WASM", "CLI");
-
 /// Arch Linux, Pop!_OS.
 pub const OS: (&str, &str) = ("Arch Linux", "Pop!_OS");
 
-pub trait TeamPlayer {}
+/// Rust, Bash.
+pub const PROGRAMMING_LANGUAGES: (&str, &str) = ("Rust", "Bash");
+
+/// French (5. Native), English (3. Minimum Professional Proficiency).
+pub const SPOKEN_LANGUAGES: (&str, &str) = ("French", "English");
+
+/// Git, WASM, CLI.
+pub const TECHNOLOGIES: (&str, &str, &str) = ("Git", "WASM", "CLI");
+
+// Soft Skills
 
 pub trait Autodidact {}
 
-pub trait Passionnate {}
+pub trait Enthusiast {}
 
 pub trait Flexible {}
 
-pub trait Enthusiast {}
+pub trait Passionnate {}
+
+pub trait TeamPlayer {}
 
 pub trait WantToLearn {}
 
