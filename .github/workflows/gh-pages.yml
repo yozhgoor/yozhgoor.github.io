@@ -11,7 +11,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Build
+
+      - name: build
         uses: actions-rs/cargo@v1
         with:
           command: doc
