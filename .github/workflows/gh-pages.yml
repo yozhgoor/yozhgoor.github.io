@@ -16,7 +16,9 @@ jobs:
       - uses: Swatinem/rust-cache@v1
 
       - name: build
-      - run: cargo doc
+      - uses: actions-rs/cargo@v1
+        with:
+          command: doc
 
       -name: Deploy
        uses: peaceiris/actions-gh-pages@v3
