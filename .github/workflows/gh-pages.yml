@@ -18,7 +18,7 @@ jobs:
 
       - name: Redirect
         run: |
-          echo '<meta http-equiv=refresh content=0;url=yohan_boogaert/index.html>' > target/doc/index.html
+          echo '<meta http-equiv="refresh" content="0;url=yohan_boogaert/">' > target/doc/index.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
