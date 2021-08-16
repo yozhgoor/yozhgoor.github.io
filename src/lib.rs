@@ -1,18 +1,17 @@
-//! A former emergency response driver who has always been interested in
+//! I'm a Former emergency response driver, who always had a big interest in
 //! programming and technology. I've been running Linux for 6 years, I tried
 //! many distributions (Ubuntu, Tails, Manjaro,...). I use Arch Linux as my
 //! daily driver because Arch gives me the opportunity to really discover what
-//! it's going under the hood.
+//! it's going on under the hood.
 //!
-//! I heard about Rust in 2020 from a friend who shared her knowledge with me
-//! about programming and helped me with Linux. Recently that friend (who is my
-//! mentor now) gave me the opportunity to realize my dream to become a software
-//! developer! I'm currently learning Rust at RustMinded, including all the
-//! technical and non-technical skills.
+//! I had the chance to get insight knowledge on Rust in 2020 from a friend that
+//! became my mentor. I've got the opportunity to learn Rust at RustMinded
+//! including all the technical and non-technical skills to become a developer.
 //!
 //! You can find me on [Github](https://github.com/yozhgoor) and
 //! [Twitter](https://twitter.com/yozhgoor).
-//! You can also send me a [mail](mailto:recruit-yozhgoor@protonmail.com).
+//! You can also send me an
+//! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
 /// Junior at RustMinded - Current
 pub mod software_developer {}
@@ -61,19 +60,19 @@ pub enum RustBookFr {}
 pub enum ThirdiFrontend {}
 
 /// French (5. Native), English (3. Minimum Professional Proficiency).
-pub const SPOKEN_LANGUAGES: (&str, &str) = ("French", "English");
+pub const SPOKEN_LANGUAGES: () = ();
 
 /// Rust, Bash.
-pub const PROGRAMMING_LANGUAGES: (&str, &str) = ("Rust", "Bash");
+pub const PROGRAMMING_LANGUAGES: () = ();
 
 /// Yew.
-pub const FRAMEWORKS: &str = "Yew";
+pub const FRAMEWORKS: () = ();
 
 /// Git, WASM, CLI.
-pub const TECHNOLOGIES: (&str, &str, &str) = ("Git", "WASM", "CLI");
+pub const TECHNOLOGIES: () = ();
 
 /// Arch Linux, Pop!_OS.
-pub const OS: (&str, &str) = ("Arch Linux", "Pop!_OS");
+pub const OS: () = ();
 
 pub trait TeamPlayer {}
 
