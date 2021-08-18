@@ -78,7 +78,7 @@ pub trait TeamPlayer {}
 
 pub trait Autodidact {}
 
-pub trait Passionnate {}
+pub trait Passionate {}
 
 pub trait Flexible {}
 
