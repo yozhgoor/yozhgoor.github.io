@@ -15,14 +15,15 @@
 
 // Jobs
 
-/// Junior at RustMinded - Current
-pub mod software_developer {}
+/// Multiples jobs with hands on the wheel (Ambulance, Shuttle, Taxi,...).
+pub mod between_2014_and_2019 {}
 
-/// Volunteer at Centre de Secours Monceau - 2020
-pub mod emergency_medical_technician {}
+/// Saving peoples from Covid at Centre de Secours Monceau.
+pub mod between_2019_and_2020 {}
 
-/// Ambulance, Shuttle, Taxi,... - 2014 to 2019
-pub mod professional_driver {}
+/// First job with hands on the keyboard at RustMinded. Discovering the OSS
+/// world when learning how to become an Rustacean and a developer.
+pub mod current {}
 
 // Personal Projects
 
@@ -34,24 +35,17 @@ macro_rules! cargo_temp {
     () => {};
 }
 
+/// A crate to create and handle processes on Windows (similar too `std::process`).
+/// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
+#[macro_export]
+macro_rules! create_process_w {
+    () => {};
+}
+
 /// My vision of the Rust Programming Language as an introduction to Rust.
 /// [\[Repository\]](<https://github.com/yozhgoor/intro-to-rust>)
 #[macro_export]
 macro_rules! intro_to_rust {
-    () => {};
-}
-
-/// A Yew and Yewprint playground using wasm-run.
-/// [\[Repository\]](<https://github.com/yozhgoor/yewprint-playground>)
-#[macro_export]
-macro_rules! yewprint_playground {
-    () => {};
-}
-
-/// A crate to create and handle processes on Windows (similar too `std::process`).
-/// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
-#[macro_export]
-macro_rules! CreateProcessW {
     () => {};
 }
 
@@ -62,21 +56,24 @@ macro_rules! tui_do {
     () => {};
 }
 
+/// A Yew and Yewprint playground using wasm-run.
+/// [\[Repository\]](<https://github.com/yozhgoor/yewprint-playground>)
+#[macro_export]
+macro_rules! yewprint_playground {
+    () => {};
+}
+
 // OSS Contributions
-
-/// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
-/// [\[Repository\]](<https://github.com/yewprint/yewprint>)
-pub struct Yewprint {}
-
-/// Bundles and tooling for Rust WASM frontend application.
-/// [\[Repository\]](<https://github.com/wasmbl/wasmbl>)
-pub struct WasmRun {}
 
 /// A CLI tool that compares a crate's public API between two different
 /// branches, shows what changed, and suggests the next version according to
 /// semver.
 /// [\[Repository\]](<https://github.com/iomentum/cargo-breaking>)
 pub struct CargoBreaking {}
+
+/// The place to be hired as an awesome Rustacean. (Under development)
+/// [\[Repository\]](<https://github.com/rustminded/recruit-rust>)
+pub struct RecruitRust {}
 
 /// French translation of the book "The Rust Programming Language".
 /// [\[Repository\]](<https://github.com/Jimskapt/rust-book-fr>)
@@ -88,55 +85,64 @@ pub struct RustBookFr {}
 /// [\[Site\]](<https://bigboysystems.com/>)
 pub struct ThirdIFrontend {}
 
-/// The place to be hired as an awesome Rustacean. (Under development)
-/// [\[Repository\]](<https://github.com/rustminded/recruit-rust>)
-pub struct RecruitRust {}
+/// Bundles and tooling for Rust WASM frontend application.
+/// [\[Repository\]](<https://github.com/wasmbl/wasmbl>)
+pub struct WasmRun {}
 
 /// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)
 /// for your WASM project.
 /// [\[Repository\]](<https://github.com/rustminded/xtask-wasm>)
 pub struct XtaskWasm {}
 
+/// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
+/// [\[Repository\]](<https://github.com/yewprint/yewprint>)
+pub struct Yewprint {}
+
 // Non-technical skills
-
-/// Web application deployment using [Netlify](<https://www.netlify.com>).
-pub enum WebDeployment {}
-
-/// Continuous Integration via [GitHub Actions](<https://github.com/actions>).
-pub enum SettingUpCI {}
 
 /// Release, update and maintenance of an OSS project.
 pub enum OssProjectMaintenance {}
 
+/// Project organisation using
+/// [GitHub Project](<https://docs.github.com/en/issues/trying-out-the-new-projects-experience/about-projects>)
+/// and [GitHub settings](<https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features>).
+pub enum ProjectOrganisation {}
+
+/// Continuous Integration via [GitHub Actions](<https://github.com/actions>).
+pub enum SettingUpCI {}
+
+/// Web application deployment using [Netlify](<https://www.netlify.com>).
+pub enum WebDeployment {}
+
 // Technical skills
-
-/// French (5. Native), English (3. Minimum Professional Proficiency).
-pub const SPOKEN_LANGUAGES: () = ();
-
-/// Rust, Bash.
-pub const PROGRAMMING_LANGUAGES: () = ();
 
 /// Yew.
 pub const FRAMEWORKS: () = ();
 
-/// Git, WASM, CLI, Terminal UI.
-pub const TECHNOLOGIES: () = ();
-
 /// Arch Linux, Pop!_OS.
 pub const OS: () = ();
 
-// Personal traits
+/// Rust, Bash.
+pub const PROGRAMMING_LANGUAGES: () = ();
 
-pub trait TeamPlayer {}
+/// French (5. Native), English (3. Minimum Professional Proficiency).
+pub const SPOKEN_LANGUAGES: () = ();
+
+/// Git, WASM, CLI, Terminal UI.
+pub const TECHNOLOGIES: () = ();
+
+// Personal traits
 
 pub trait Autodidact {}
 
-pub trait Passionate {}
+pub trait Enthusiast {}
 
 pub trait Flexible {}
 
-pub trait Enthusiast {}
+pub trait Passionate {}
 
-pub trait WantToLearn {}
+pub trait TeamPlayer {}
 
 pub trait WantToBuild {}
+
+pub trait WantToLearn {}
