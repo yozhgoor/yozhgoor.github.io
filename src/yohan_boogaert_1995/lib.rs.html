@@ -140,6 +140,12 @@
 <span id="140">140</span>
 <span id="141">141</span>
 <span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
 </pre><pre class="rust"><code><span class="doccomment">//! I&#39;m a Former emergency response driver, who always had a big interest in</span>
 <span class="doccomment">//! programming and technology. I&#39;ve been running Linux for 6 years, I tried</span>
 <span class="doccomment">//! many distributions (Ubuntu, Tails, Manjaro,...). I use Arch Linux as my</span>
@@ -157,14 +163,15 @@
 
 <span class="comment">// Jobs</span>
 
-<span class="doccomment">/// Junior at RustMinded - Current</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">software_developer</span> {}
+<span class="doccomment">/// Multiples jobs with hands on the wheel (Ambulance, Shuttle, Taxi,...).</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">between_2014_and_2019</span> {}
 
-<span class="doccomment">/// Volunteer at Centre de Secours Monceau - 2020</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">emergency_medical_technician</span> {}
+<span class="doccomment">/// Saving peoples from Covid at Centre de Secours Monceau.</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">between_2019_and_2020</span> {}
 
-<span class="doccomment">/// Ambulance, Shuttle, Taxi,... - 2014 to 2019</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">professional_driver</span> {}
+<span class="doccomment">/// First job with hands on the keyboard at RustMinded. Discovering the OSS</span>
+<span class="doccomment">/// world when learning how to become an Rustacean and a developer.</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">current</span> {}
 
 <span class="comment">// Personal Projects</span>
 
@@ -176,24 +183,17 @@
     () =&gt; {};
 }
 
+<span class="doccomment">/// A crate to create and handle processes on Windows (similar too `std::process`).</span>
+<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/CreateProcessW&gt;)</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
+<span class="macro">macro_rules!</span> <span class="ident">create_process_w</span> {
+    () =&gt; {};
+}
+
 <span class="doccomment">/// My vision of the Rust Programming Language as an introduction to Rust.</span>
 <span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/intro-to-rust&gt;)</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">intro_to_rust</span> {
-    () =&gt; {};
-}
-
-<span class="doccomment">/// A Yew and Yewprint playground using wasm-run.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/yewprint-playground&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">yewprint_playground</span> {
-    () =&gt; {};
-}
-
-<span class="doccomment">/// A crate to create and handle processes on Windows (similar too `std::process`).</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/CreateProcessW&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">CreateProcessW</span> {
     () =&gt; {};
 }
 
@@ -204,21 +204,24 @@
     () =&gt; {};
 }
 
+<span class="doccomment">/// A Yew and Yewprint playground using wasm-run.</span>
+<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/yewprint-playground&gt;)</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
+<span class="macro">macro_rules!</span> <span class="ident">yewprint_playground</span> {
+    () =&gt; {};
+}
+
 <span class="comment">// OSS Contributions</span>
-
-<span class="doccomment">/// Port of [blueprintjs](&lt;https://blueprintjs.com&gt;) to Yew.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yewprint/yewprint&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Yewprint</span> {}
-
-<span class="doccomment">/// Bundles and tooling for Rust WASM frontend application.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/wasmbl/wasmbl&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WasmRun</span> {}
 
 <span class="doccomment">/// A CLI tool that compares a crate&#39;s public API between two different</span>
 <span class="doccomment">/// branches, shows what changed, and suggests the next version according to</span>
 <span class="doccomment">/// semver.</span>
 <span class="doccomment">/// [\[Repository\]](&lt;https://github.com/iomentum/cargo-breaking&gt;)</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CargoBreaking</span> {}
+
+<span class="doccomment">/// The place to be hired as an awesome Rustacean. (Under development)</span>
+<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/recruit-rust&gt;)</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RecruitRust</span> {}
 
 <span class="doccomment">/// French translation of the book &quot;The Rust Programming Language&quot;.</span>
 <span class="doccomment">/// [\[Repository\]](&lt;https://github.com/Jimskapt/rust-book-fr&gt;)</span>
@@ -230,58 +233,67 @@
 <span class="doccomment">/// [\[Site\]](&lt;https://bigboysystems.com/&gt;)</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ThirdIFrontend</span> {}
 
-<span class="doccomment">/// The place to be hired as an awesome Rustacean. (Under development)</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/recruit-rust&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RecruitRust</span> {}
+<span class="doccomment">/// Bundles and tooling for Rust WASM frontend application.</span>
+<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/wasmbl/wasmbl&gt;)</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WasmRun</span> {}
 
 <span class="doccomment">/// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)</span>
 <span class="doccomment">/// for your WASM project.</span>
 <span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/xtask-wasm&gt;)</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">XtaskWasm</span> {}
 
+<span class="doccomment">/// Port of [blueprintjs](&lt;https://blueprintjs.com&gt;) to Yew.</span>
+<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yewprint/yewprint&gt;)</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Yewprint</span> {}
+
 <span class="comment">// Non-technical skills</span>
-
-<span class="doccomment">/// Web application deployment using [Netlify](&lt;https://www.netlify.com&gt;).</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">WebDeployment</span> {}
-
-<span class="doccomment">/// Continuous Integration via [GitHub Actions](&lt;https://github.com/actions&gt;).</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SettingUpCI</span> {}
 
 <span class="doccomment">/// Release, update and maintenance of an OSS project.</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OssProjectMaintenance</span> {}
 
+<span class="doccomment">/// Project organisation using</span>
+<span class="doccomment">/// [GitHub Project](&lt;https://docs.github.com/en/issues/trying-out-the-new-projects-experience/about-projects&gt;)</span>
+<span class="doccomment">/// and [GitHub settings](&lt;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features&gt;).</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ProjectOrganisation</span> {}
+
+<span class="doccomment">/// Continuous Integration via [GitHub Actions](&lt;https://github.com/actions&gt;).</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SettingUpCI</span> {}
+
+<span class="doccomment">/// Web application deployment using [Netlify](&lt;https://www.netlify.com&gt;).</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">WebDeployment</span> {}
+
 <span class="comment">// Technical skills</span>
-
-<span class="doccomment">/// French (5. Native), English (3. Minimum Professional Proficiency).</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPOKEN_LANGUAGES</span>: () <span class="op">=</span> ();
-
-<span class="doccomment">/// Rust, Bash.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROGRAMMING_LANGUAGES</span>: () <span class="op">=</span> ();
 
 <span class="doccomment">/// Yew.</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FRAMEWORKS</span>: () <span class="op">=</span> ();
 
-<span class="doccomment">/// Git, WASM, CLI, Terminal UI.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TECHNOLOGIES</span>: () <span class="op">=</span> ();
-
 <span class="doccomment">/// Arch Linux, Pop!_OS.</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OS</span>: () <span class="op">=</span> ();
 
-<span class="comment">// Personal traits</span>
+<span class="doccomment">/// Rust, Bash.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROGRAMMING_LANGUAGES</span>: () <span class="op">=</span> ();
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TeamPlayer</span> {}
+<span class="doccomment">/// French (5. Native), English (3. Minimum Professional Proficiency).</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPOKEN_LANGUAGES</span>: () <span class="op">=</span> ();
+
+<span class="doccomment">/// Git, WASM, CLI, Terminal UI.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TECHNOLOGIES</span>: () <span class="op">=</span> ();
+
+<span class="comment">// Personal traits</span>
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Autodidact</span> {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Passionate</span> {}
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Enthusiast</span> {}
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Flexible</span> {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Enthusiast</span> {}
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Passionate</span> {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WantToLearn</span> {}
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TeamPlayer</span> {}
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WantToBuild</span> {}
+
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WantToLearn</span> {}
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yohan_boogaert_1995" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
