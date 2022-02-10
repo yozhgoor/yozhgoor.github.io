@@ -94,6 +94,10 @@ pub struct WasmRun {}
 /// [\[Repository\]](<https://github.com/rustminded/xtask-wasm>)
 pub struct XtaskWasm {}
 
+/// A customizable helper to watch for changes in your xtask projects.
+/// [\Repository\]](<https://github.com/rustminded/xtask-watch>)
+pub struct XtaskWatch {}
+
 /// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
 /// [\[Repository\]](<https://github.com/yewprint/yewprint>)
 pub struct Yewprint {}
