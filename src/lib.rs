@@ -8,18 +8,16 @@
 //! became my mentor. I've got the opportunity to learn Rust at RustMinded
 //! including all the technical and non-technical skills to become a developer.
 //!
-//! You can find me on [Github](https://github.com/yozhgoor) and
+//! You can find me on [GitHub](https://github.com/yozhgoor) and
 //! [Twitter](https://twitter.com/yozhgoor).
 //! You can also send me an
 //! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
 // Jobs
 
-/// Multiples jobs with hands on the wheel (Ambulance, Shuttle, Taxi,...).
-pub mod between_2014_and_2019 {}
-
-/// Saving peoples from Covid at Centre de Secours Monceau.
-pub mod between_2019_and_2020 {}
+/// Multiple jobs with hands on the wheel (emergency response driver, airport
+/// shuttle, taxi,...).
+pub mod between_2014_and_2020 {}
 
 /// First job with hands on the keyboard at RustMinded. Discovering the OSS
 /// world when learning how to become an Rustacean and a developer.
