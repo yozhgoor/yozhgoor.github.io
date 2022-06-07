@@ -17,11 +17,14 @@
 
 /// Multiple jobs with hands on the wheel (emergency response driver, airport
 /// shuttle, taxi,...).
-pub mod between_2014_and_2020 {}
+pub mod exp01_2014_2020 {}
 
 /// First job with hands on the keyboard at RustMinded. Discovering the OSS
 /// world when learning how to become an Rustacean and a developer.
-pub mod current {}
+pub mod exp02_2020_2022 {}
+
+/// Freelance mission as a Rust Developer at Cumul.io working on a query engine for data analytics.
+pub mod exp03_2022 {}
 
 // Personal Projects
 
@@ -68,6 +71,11 @@ macro_rules! yewprint_playground {
 /// semver.
 /// [\[Repository\]](<https://github.com/iomentum/cargo-breaking>)
 pub struct CargoBreaking {}
+
+/// A developer tool to help you get up and running quickly with a new Rust project by leveraging a
+/// pre-existing git repository as a template.
+/// [\[Repository\]](<https://github.com/cargo-generate/cargo-generate>)
+pub struct CargoGenerate {}
 
 /// The place to be hired as an awesome Rustacean. (Under development)
 /// [\[Repository\]](<https://github.com/rustminded/recruit-rust>)
