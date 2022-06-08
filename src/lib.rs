@@ -77,6 +77,10 @@ pub struct CargoBreaking {}
 /// [\[Repository\]](<https://github.com/cargo-generate/cargo-generate>)
 pub struct CargoGenerate {}
 
+/// Date and Time for Rust.
+/// [\[Repository\]](<https://github.com/chronotope/chrono>)
+pub struct Chrono {}
+
 /// The place to be hired as an awesome Rustacean. (Under development)
 /// [\[Repository\]](<https://github.com/rustminded/recruit-rust>)
 pub struct RecruitRust {}
