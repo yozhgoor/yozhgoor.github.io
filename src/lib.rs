@@ -8,8 +8,8 @@
 //! became my mentor. I've got the opportunity to learn Rust at RustMinded
 //! including all the technical and non-technical skills to become a developer.
 //!
-//! You can find me on [GitHub](https://github.com/yozhgoor) and
-//! [Twitter](https://twitter.com/yozhgoor).
+//! You can find me on [GitHub](https://github.com/yozhgoor),
+//! [Twitter](https://twitter.com/yozhgoor) and [Mastodon](https://hachyderm.io/@yozhgoor).
 //! You can also send me an
 //! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
@@ -20,11 +20,18 @@
 pub mod exp01_2014_2020 {}
 
 /// First job with hands on the keyboard at RustMinded. Discovering the OSS
-/// world when learning how to become an Rustacean and a developer.
+/// world when learning how to become an Rustacean.
 pub mod exp02_2020_2022 {}
 
-/// Freelance mission as a Rust Developer at Cumul.io working on a query engine for data analytics.
+/// Freelance mission as a Rust Developer at Cumul.io rewriting in Rust a query engine for data
+/// analytics using faster and more efficient queries and improving the relation of multiple
+/// microservices in an AWS cloud environment.
 pub mod exp03_2022 {}
+
+/// Freelance mission as a Rust Developer at Ystorian working on a cybersecurity platform that
+/// gathers information from the OS, BIOS, kernel or network on different systems in parallel to
+/// assess security vulnerabilities and compliance level.
+pub mod exp04_2022_today {}
 
 // Personal Projects
 
@@ -95,6 +102,10 @@ pub struct RustBookFr {}
 /// [\[Site\]](<https://bigboysystems.com/>)
 pub struct ThirdIFrontend {}
 
+/// TopoJSON bindings and utilities for Rust.
+/// [\[Repository\]](<https://github.com/georust/topojson>)
+pub struct TopoJson {}
+
 /// Bundles and tooling for Rust WASM frontend application.
 /// [\[Repository\]](<https://github.com/wasmbl/wasmbl>)
 pub struct WasmRun {}
@@ -105,7 +116,7 @@ pub struct WasmRun {}
 pub struct XtaskWasm {}
 
 /// A customizable helper to watch for changes in your xtask projects.
-/// [\Repository\]](<https://github.com/rustminded/xtask-watch>)
+/// [\[Repository\]](<https://github.com/rustminded/xtask-watch>)
 pub struct XtaskWatch {}
 
 /// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
@@ -142,7 +153,7 @@ pub const PROGRAMMING_LANGUAGES: () = ();
 /// French (5. Native), English (3. Minimum Professional Proficiency).
 pub const SPOKEN_LANGUAGES: () = ();
 
-/// Git, WASM, CLI, Terminal UI.
+/// Git, WASM, CLI, Terminal UI, Platform agnosticism.
 pub const TECHNOLOGIES: () = ();
 
 // Personal traits
