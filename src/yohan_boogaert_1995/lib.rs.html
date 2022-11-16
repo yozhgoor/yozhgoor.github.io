@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../yohan_boogaert_1995/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../yohan_boogaert_1995/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../yohan_boogaert_1995/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../yohan_boogaert_1995/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../yohan_boogaert_1995/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../yohan_boogaert_1995/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -165,168 +160,189 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
-</pre><pre class="rust"><code><span class="doccomment">//! I&#39;m a Former emergency response driver, who always had a big interest in</span>
-<span class="doccomment">//! programming and technology. I&#39;ve been running Linux for 6 years, I tried</span>
-<span class="doccomment">//! many distributions (Ubuntu, Tails, Manjaro,...). I use Arch Linux as my</span>
-<span class="doccomment">//! daily driver because Arch gives me the opportunity to really discover what</span>
-<span class="doccomment">//! it&#39;s going on under the hood.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! I had the chance to get insight knowledge on Rust in 2020 from a friend that</span>
-<span class="doccomment">//! became my mentor. I&#39;ve got the opportunity to learn Rust at RustMinded</span>
-<span class="doccomment">//! including all the technical and non-technical skills to become a developer.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! You can find me on [GitHub](https://github.com/yozhgoor) and</span>
-<span class="doccomment">//! [Twitter](https://twitter.com/yozhgoor).</span>
-<span class="doccomment">//! You can also send me an</span>
-<span class="doccomment">//! [email](mailto:yohan.boogaert+recruit@protonmail.com).</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+</pre><pre class="rust"><code><span class="doccomment">//! I&#39;m a Former emergency response driver, who always had a big interest in
+//! programming and technology. I&#39;ve been running Linux for 6 years, I tried
+//! many distributions (Ubuntu, Tails, Manjaro,...). I use Arch Linux as my
+//! daily driver because Arch gives me the opportunity to really discover what
+//! it&#39;s going on under the hood.
+//!
+//! I had the chance to get insight knowledge on Rust in 2020 from a friend that
+//! became my mentor. I&#39;ve got the opportunity to learn Rust at RustMinded
+//! including all the technical and non-technical skills to become a developer.
+//!
+//! You can find me on [GitHub](https://github.com/yozhgoor),
+//! [Twitter](https://twitter.com/yozhgoor) and [Mastodon](https://hachyderm.io/@yozhgoor).
+//! You can also send me an
+//! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
-<span class="comment">// Jobs</span>
+</span><span class="comment">// Jobs
 
-<span class="doccomment">/// Multiple jobs with hands on the wheel (emergency response driver, airport</span>
-<span class="doccomment">/// shuttle, taxi,...).</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">exp01_2014_2020</span> {}
+</span><span class="doccomment">/// Multiple jobs with hands on the wheel (emergency response driver, airport
+/// shuttle, taxi,...).
+</span><span class="kw">pub mod </span>exp01_2014_2020 {}
 
-<span class="doccomment">/// First job with hands on the keyboard at RustMinded. Discovering the OSS</span>
-<span class="doccomment">/// world when learning how to become an Rustacean and a developer.</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">exp02_2020_2022</span> {}
+<span class="doccomment">/// First job with hands on the keyboard at RustMinded. Discovering the OSS
+/// world when learning how to become an Rustacean.
+</span><span class="kw">pub mod </span>exp02_2020_2022 {}
 
-<span class="doccomment">/// Freelance mission as a Rust Developer at Cumul.io working on a query engine for data analytics.</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">exp03_2022</span> {}
+<span class="doccomment">/// Freelance mission as a Rust Developer at Cumul.io rewriting in Rust a query engine for data
+/// analytics using faster and more efficient queries and improving the relation of multiple
+/// microservices in an AWS cloud environment.
+</span><span class="kw">pub mod </span>exp03_2022 {}
 
-<span class="comment">// Personal Projects</span>
+<span class="doccomment">/// Freelance mission as a Rust Developer at Ystorian working on a cybersecurity platform that
+/// gathers information from the OS, BIOS, kernel or network on different systems in parallel to
+/// assess security vulnerabilities and compliance level.
+</span><span class="kw">pub mod </span>exp04_2022_today {}
 
-<span class="doccomment">/// A CLI tool that allows you to create a temporary new Rust project using</span>
-<span class="doccomment">/// cargo with already installed dependencies.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/cargo-temp&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">cargo_temp</span> {
+<span class="comment">// Personal Projects
+
+</span><span class="doccomment">/// A CLI tool that allows you to create a temporary new Rust project using
+/// cargo with already installed dependencies.
+/// [\[Repository\]](&lt;https://github.com/rustminded/cargo-temp&gt;)
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>cargo_temp {
     () =&gt; {};
 }
 
-<span class="doccomment">/// A crate to create and handle processes on Windows (similar too `std::process`).</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/CreateProcessW&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">create_process_w</span> {
+<span class="doccomment">/// A crate to create and handle processes on Windows (similar too `std::process`).
+/// [\[Repository\]](&lt;https://github.com/yozhgoor/CreateProcessW&gt;)
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>create_process_w {
     () =&gt; {};
 }
 
-<span class="doccomment">/// My vision of the Rust Programming Language as an introduction to Rust.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/intro-to-rust&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">intro_to_rust</span> {
+<span class="doccomment">/// My vision of the Rust Programming Language as an introduction to Rust.
+/// [\[Repository\]](&lt;https://github.com/yozhgoor/intro-to-rust&gt;)
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>intro_to_rust {
     () =&gt; {};
 }
 
-<span class="doccomment">/// Yet Another To-Do App in your Terminal. (Under development)</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/tui-do&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">tui_do</span> {
+<span class="doccomment">/// Yet Another To-Do App in your Terminal. (Under development)
+/// [\[Repository\]](&lt;https://github.com/yozhgoor/tui-do&gt;)
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>tui_do {
     () =&gt; {};
 }
 
-<span class="doccomment">/// A Yew and Yewprint playground using wasm-run.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yozhgoor/yewprint-playground&gt;)</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">yewprint_playground</span> {
+<span class="doccomment">/// A Yew and Yewprint playground using wasm-run.
+/// [\[Repository\]](&lt;https://github.com/yozhgoor/yewprint-playground&gt;)
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>yewprint_playground {
     () =&gt; {};
 }
 
-<span class="comment">// OSS Contributions</span>
+<span class="comment">// OSS Contributions
 
-<span class="doccomment">/// A CLI tool that compares a crate&#39;s public API between two different</span>
-<span class="doccomment">/// branches, shows what changed, and suggests the next version according to</span>
-<span class="doccomment">/// semver.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/iomentum/cargo-breaking&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CargoBreaking</span> {}
+</span><span class="doccomment">/// A CLI tool that compares a crate&#39;s public API between two different
+/// branches, shows what changed, and suggests the next version according to
+/// semver.
+/// [\[Repository\]](&lt;https://github.com/iomentum/cargo-breaking&gt;)
+</span><span class="kw">pub struct </span>CargoBreaking {}
 
-<span class="doccomment">/// A developer tool to help you get up and running quickly with a new Rust project by leveraging a</span>
-<span class="doccomment">/// pre-existing git repository as a template.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/cargo-generate/cargo-generate&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CargoGenerate</span> {}
+<span class="doccomment">/// A developer tool to help you get up and running quickly with a new Rust project by leveraging a
+/// pre-existing git repository as a template.
+/// [\[Repository\]](&lt;https://github.com/cargo-generate/cargo-generate&gt;)
+</span><span class="kw">pub struct </span>CargoGenerate {}
 
-<span class="doccomment">/// Date and Time for Rust.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/chronotope/chrono&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Chrono</span> {}
+<span class="doccomment">/// Date and Time for Rust.
+/// [\[Repository\]](&lt;https://github.com/chronotope/chrono&gt;)
+</span><span class="kw">pub struct </span>Chrono {}
 
-<span class="doccomment">/// The place to be hired as an awesome Rustacean. (Under development)</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/recruit-rust&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RecruitRust</span> {}
+<span class="doccomment">/// The place to be hired as an awesome Rustacean. (Under development)
+/// [\[Repository\]](&lt;https://github.com/rustminded/recruit-rust&gt;)
+</span><span class="kw">pub struct </span>RecruitRust {}
 
-<span class="doccomment">/// French translation of the book &quot;The Rust Programming Language&quot;.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/Jimskapt/rust-book-fr&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RustBookFr</span> {}
+<span class="doccomment">/// French translation of the book &quot;The Rust Programming Language&quot;.
+/// [\[Repository\]](&lt;https://github.com/Jimskapt/rust-book-fr&gt;)
+</span><span class="kw">pub struct </span>RustBookFr {}
 
-<span class="doccomment">/// Third-I, the only camera that replicates your hearing and your point of</span>
-<span class="doccomment">/// view.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/BigBoySystems/third-i-frontend&gt;) |</span>
-<span class="doccomment">/// [\[Site\]](&lt;https://bigboysystems.com/&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ThirdIFrontend</span> {}
+<span class="doccomment">/// Third-I, the only camera that replicates your hearing and your point of
+/// view.
+/// [\[Repository\]](&lt;https://github.com/BigBoySystems/third-i-frontend&gt;) |
+/// [\[Site\]](&lt;https://bigboysystems.com/&gt;)
+</span><span class="kw">pub struct </span>ThirdIFrontend {}
 
-<span class="doccomment">/// Bundles and tooling for Rust WASM frontend application.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/wasmbl/wasmbl&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WasmRun</span> {}
+<span class="doccomment">/// TopoJSON bindings and utilities for Rust.
+/// [\[Repository\]](&lt;https://github.com/georust/topojson&gt;)
+</span><span class="kw">pub struct </span>TopoJson {}
 
-<span class="doccomment">/// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)</span>
-<span class="doccomment">/// for your WASM project.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/rustminded/xtask-wasm&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">XtaskWasm</span> {}
+<span class="doccomment">/// Bundles and tooling for Rust WASM frontend application.
+/// [\[Repository\]](&lt;https://github.com/wasmbl/wasmbl&gt;)
+</span><span class="kw">pub struct </span>WasmRun {}
 
-<span class="doccomment">/// A customizable helper to watch for changes in your xtask projects.</span>
-<span class="doccomment">/// [\Repository\]](&lt;https://github.com/rustminded/xtask-watch&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">XtaskWatch</span> {}
+<span class="doccomment">/// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)
+/// for your WASM project.
+/// [\[Repository\]](&lt;https://github.com/rustminded/xtask-wasm&gt;)
+</span><span class="kw">pub struct </span>XtaskWasm {}
 
-<span class="doccomment">/// Port of [blueprintjs](&lt;https://blueprintjs.com&gt;) to Yew.</span>
-<span class="doccomment">/// [\[Repository\]](&lt;https://github.com/yewprint/yewprint&gt;)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Yewprint</span> {}
+<span class="doccomment">/// A customizable helper to watch for changes in your xtask projects.
+/// [\[Repository\]](&lt;https://github.com/rustminded/xtask-watch&gt;)
+</span><span class="kw">pub struct </span>XtaskWatch {}
 
-<span class="comment">// Non-technical skills</span>
+<span class="doccomment">/// Port of [blueprintjs](&lt;https://blueprintjs.com&gt;) to Yew.
+/// [\[Repository\]](&lt;https://github.com/yewprint/yewprint&gt;)
+</span><span class="kw">pub struct </span>Yewprint {}
 
-<span class="doccomment">/// Release, update and maintenance of an OSS project.</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OssProjectMaintenance</span> {}
+<span class="comment">// Non-technical skills
 
-<span class="doccomment">/// Project organisation using</span>
-<span class="doccomment">/// [GitHub Project](&lt;https://docs.github.com/en/issues/trying-out-the-new-projects-experience/about-projects&gt;)</span>
-<span class="doccomment">/// and [GitHub settings](&lt;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features&gt;).</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ProjectOrganisation</span> {}
+</span><span class="doccomment">/// Release, update and maintenance of an OSS project.
+</span><span class="kw">pub enum </span>OssProjectMaintenance {}
 
-<span class="doccomment">/// Continuous Integration via [GitHub Actions](&lt;https://github.com/actions&gt;).</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SettingUpCI</span> {}
+<span class="doccomment">/// Project organisation using
+/// [GitHub Project](&lt;https://docs.github.com/en/issues/trying-out-the-new-projects-experience/about-projects&gt;)
+/// and [GitHub settings](&lt;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features&gt;).
+</span><span class="kw">pub enum </span>ProjectOrganisation {}
 
-<span class="doccomment">/// Web application deployment using [Netlify](&lt;https://www.netlify.com&gt;).</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">WebDeployment</span> {}
+<span class="doccomment">/// Continuous Integration via [GitHub Actions](&lt;https://github.com/actions&gt;).
+</span><span class="kw">pub enum </span>SettingUpCI {}
 
-<span class="comment">// Technical skills</span>
+<span class="doccomment">/// Web application deployment using [Netlify](&lt;https://www.netlify.com&gt;).
+</span><span class="kw">pub enum </span>WebDeployment {}
 
-<span class="doccomment">/// Yew.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FRAMEWORKS</span>: () <span class="op">=</span> ();
+<span class="comment">// Technical skills
 
-<span class="doccomment">/// Arch Linux, Pop!_OS.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OS</span>: () <span class="op">=</span> ();
+</span><span class="doccomment">/// Yew.
+</span><span class="kw">pub const </span>FRAMEWORKS: () = ();
 
-<span class="doccomment">/// Rust, Bash.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROGRAMMING_LANGUAGES</span>: () <span class="op">=</span> ();
+<span class="doccomment">/// Arch Linux, Pop!_OS.
+</span><span class="kw">pub const </span>OS: () = ();
 
-<span class="doccomment">/// French (5. Native), English (3. Minimum Professional Proficiency).</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPOKEN_LANGUAGES</span>: () <span class="op">=</span> ();
+<span class="doccomment">/// Rust, Bash.
+</span><span class="kw">pub const </span>PROGRAMMING_LANGUAGES: () = ();
 
-<span class="doccomment">/// Git, WASM, CLI, Terminal UI.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TECHNOLOGIES</span>: () <span class="op">=</span> ();
+<span class="doccomment">/// French (5. Native), English (3. Minimum Professional Proficiency).
+</span><span class="kw">pub const </span>SPOKEN_LANGUAGES: () = ();
 
-<span class="comment">// Personal traits</span>
+<span class="doccomment">/// Git, WASM, CLI, Terminal UI, Platform agnosticism.
+</span><span class="kw">pub const </span>TECHNOLOGIES: () = ();
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Autodidact</span> {}
+<span class="comment">// Personal traits
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Enthusiast</span> {}
+</span><span class="kw">pub trait </span>Autodidact {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Flexible</span> {}
+<span class="kw">pub trait </span>Enthusiast {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Passionate</span> {}
+<span class="kw">pub trait </span>Flexible {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TeamPlayer</span> {}
+<span class="kw">pub trait </span>Passionate {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WantToBuild</span> {}
+<span class="kw">pub trait </span>TeamPlayer {}
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WantToLearn</span> {}
+<span class="kw">pub trait </span>WantToBuild {}
+
+<span class="kw">pub trait </span>WantToLearn {}
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yohan_boogaert_1995" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="yohan_boogaert_1995" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

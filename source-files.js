@@ -1,3 +1,4 @@
-var N = null;var sourcesIndex = {};
-sourcesIndex["yohan_boogaert_1995"] = {"name":"","files":["lib.rs"]};
+var sourcesIndex = JSON.parse('{\
+"yohan_boogaert_1995":["",[],["lib.rs"]]\
+}');
 createSourceSidebar();
