@@ -31,7 +31,7 @@ pub mod exp02_2022 {}
 /// Freelance mission as a Rust Developer at Ystorian working on a cybersecurity platform that
 /// gathers information from the OS, BIOS, kernel or network on different systems in parallel to
 /// assess security vulnerabilities and compliance level.
-pub mod exp01_2022_today {}
+pub mod exp01_2022_2024 {}
 
 // Personal Projects
 
@@ -40,27 +40,6 @@ pub mod exp01_2022_today {}
 /// [\[Repository\]](<https://github.com/rustminded/cargo-temp>)
 #[macro_export]
 macro_rules! cargo_temp {
-    () => {};
-}
-
-/// A crate to create and handle processes on Windows (similar too `std::process`).
-/// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
-#[macro_export]
-macro_rules! create_process_w {
-    () => {};
-}
-
-/// My vision of the Rust Programming Language as an introduction to Rust.
-/// [\[Repository\]](<https://github.com/yozhgoor/intro-to-rust>)
-#[macro_export]
-macro_rules! intro_to_rust {
-    () => {};
-}
-
-/// Yet Another To-Do App in your Terminal. (Under development)
-/// [\[Repository\]](<https://github.com/yozhgoor/tui-do>)
-#[macro_export]
-macro_rules! tui_do {
     () => {};
 }
 
@@ -73,12 +52,6 @@ macro_rules! yewprint_playground {
 
 // OSS Contributions
 
-/// A CLI tool that compares a crate's public API between two different
-/// branches, shows what changed, and suggests the next version according to
-/// semver.
-/// [\[Repository\]](<https://github.com/iomentum/cargo-breaking>)
-pub struct CargoBreaking {}
-
 /// A developer tool to help you get up and running quickly with a new Rust project by leveraging a
 /// pre-existing git repository as a template.
 /// [\[Repository\]](<https://github.com/cargo-generate/cargo-generate>)
@@ -87,10 +60,6 @@ pub struct CargoGenerate {}
 /// Date and Time for Rust.
 /// [\[Repository\]](<https://github.com/chronotope/chrono>)
 pub struct Chrono {}
-
-/// The place to be hired as an awesome Rustacean. (Under development)
-/// [\[Repository\]](<https://github.com/rustminded/recruit-rust>)
-pub struct RecruitRust {}
 
 /// French translation of the book "The Rust Programming Language".
 /// [\[Repository\]](<https://github.com/Jimskapt/rust-book-fr>)
@@ -106,10 +75,6 @@ pub struct ThirdIFrontend {}
 /// [\[Repository\]](<https://github.com/georust/topojson>)
 pub struct TopoJson {}
 
-/// Bundles and tooling for Rust WASM frontend application.
-/// [\[Repository\]](<https://github.com/wasmbl/wasmbl>)
-pub struct WasmRun {}
-
 /// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)
 /// for your WASM project.
 /// [\[Repository\]](<https://github.com/rustminded/xtask-wasm>)
@@ -122,6 +87,11 @@ pub struct XtaskWatch {}
 /// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
 /// [\[Repository\]](<https://github.com/yewprint/yewprint>)
 pub struct Yewprint {}
+
+/// Library to get system information such as processes,
+/// Cpus, disks, components and networks.
+/// [\[Repository\]](<https://github.com/GuillaumeGomez/sysinfo>)
+pub struct Sysinfo {}
 
 // Non-technical skills
 
