@@ -1,15 +1,14 @@
-//! I'm a Former emergency response driver, who always had a big interest in
-//! programming and technology. I've been running Linux for 6 years, I tried
-//! many distributions (Ubuntu, Tails, Manjaro,...). I use Arch Linux as my
-//! daily driver because Arch gives me the opportunity to really discover what
-//! it's going on under the hood.
-//!
-//! I had the chance to get insight knowledge on Rust in 2020 from a friend that
-//! became my mentor. I've got the opportunity to learn Rust at RustMinded
-//! including all the technical and non-technical skills to become a developer.
+//! I started working with Rust in 2020 at RustMinded, where I built a strong foundation in the
+//! language and the open-source ecosystem. Since then, I’ve contributed to WebAssembly and Rust
+//! tools, worked on rewriting a data query engine to improve performance, or helped on the
+//! development of a cybersecurity platform for analyzing vulnerabilities on multiple systems.
+
+//! Along the way, I’ve gained practical experience with JavaScript and TypeScript, working in team
+//! environments to deliver effective solutions. I’m also an active contributor to open-source
+//! projects and rely on Linux to streamline my development workflow.
 //!
 //! You can find me on [GitHub](https://github.com/yozhgoor),
-//! [Twitter](https://twitter.com/yozhgoor) and [Mastodon](https://hachyderm.io/@yozhgoor).
+//! [Bluesky](https://bsky.app/profile/yozhgoor.bsky.social) and [Mastodon](https://hachyderm.io/@yozhgoor).
 //! You can also send me an
 //! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
@@ -31,7 +30,7 @@ pub mod exp02_2022 {}
 /// Freelance mission as a Rust Developer at Ystorian working on a cybersecurity platform that
 /// gathers information from the OS, BIOS, kernel or network on different systems in parallel to
 /// assess security vulnerabilities and compliance level.
-pub mod exp01_2022_2024 {}
+pub mod exp01_2022_2025 {}
 
 // Personal Projects
 
@@ -111,19 +110,19 @@ pub enum WebDeployment {}
 
 // Technical skills
 
-/// Yew.
+/// Yew, React, Axum.
 pub const FRAMEWORKS: () = ();
 
-/// Arch Linux, Pop!_OS.
+/// Arch Linux, Pop!_OS, macOS, Windows, Debian.
 pub const OS: () = ();
 
-/// Rust, Bash.
+/// Rust JavaScript/TypeScript, Bash.
 pub const PROGRAMMING_LANGUAGES: () = ();
 
 /// French (5. Native), English (3. Minimum Professional Proficiency).
 pub const SPOKEN_LANGUAGES: () = ();
 
-/// Git, WASM, CLI, Terminal UI, Platform agnosticism.
+/// Git, WASM, CLI, Terminal UI, Platform agnosticism, System, Web, Backend.
 pub const TECHNOLOGIES: () = ();
 
 // Personal traits
