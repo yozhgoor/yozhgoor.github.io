@@ -42,6 +42,14 @@ macro_rules! cargo_temp {
     () => {};
 }
 
+/// A library that provides an API similar to `std::process` to create and handle processes on Windows
+/// using the Win32 API.
+/// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
+#[macro_export]
+macro_rules! create_process_w {
+    () => {};
+}
+
 /// A Yew and Yewprint playground using wasm-run.
 /// [\[Repository\]](<https://github.com/yozhgoor/yewprint-playground>)
 #[macro_export]
@@ -55,6 +63,11 @@ macro_rules! yewprint_playground {
 /// pre-existing git repository as a template.
 /// [\[Repository\]](<https://github.com/cargo-generate/cargo-generate>)
 pub struct CargoGenerate {}
+
+/// Compare a crate's public API between two different branches and suggests next version 
+/// according to semver.
+/// [\[\Repository\]](<https://github.com/iomentum/cargo-breaking>)
+pub struct CargoBreaking {}
 
 /// Date and Time for Rust.
 /// [\[Repository\]](<https://github.com/chronotope/chrono>)
@@ -83,14 +96,26 @@ pub struct XtaskWasm {}
 /// [\[Repository\]](<https://github.com/rustminded/xtask-watch>)
 pub struct XtaskWatch {}
 
-/// Port of [blueprintjs](<https://blueprintjs.com>) to Yew.
+/// A port of [blueprintjs](<https://blueprintjs.com>) to Yew.
 /// [\[Repository\]](<https://github.com/yewprint/yewprint>)
 pub struct Yewprint {}
 
-/// Library to get system information such as processes,
+/// A library to get system information such as processes,
 /// Cpus, disks, components and networks.
 /// [\[Repository\]](<https://github.com/GuillaumeGomez/sysinfo>)
 pub struct Sysinfo {}
+
+/// Immutable types and ImplicitClone trait similar to Copy.
+/// [\[Repository\]](<https://github.com/yewstack/implicit-clone>)
+pub struct ImplicitClone {}
+
+/// A GPT manager that allows you to copy partitions from one disk to another.
+/// [\[Repository\]](<https://github.com/rust-disk-partition-management/gptman>)
+pub struct Gptman {}
+
+/// MBR Partition management.
+/// [\[Repository\]](<https://github.com/rust-disk-partition-management/mbrman>)
+pub struct Mbrman {}
 
 // Non-technical skills
 
@@ -110,19 +135,19 @@ pub enum WebDeployment {}
 
 // Technical skills
 
-/// Yew, React, Axum.
+/// Yew, Rocket, Axum, Actix.
 pub const FRAMEWORKS: () = ();
 
-/// Arch Linux, Pop!_OS, macOS, Windows, Debian.
+/// Nixos, Arch Linux, Pop!_OS, macOS, Windows, Debian, Tails.
 pub const OS: () = ();
 
-/// Rust JavaScript/TypeScript, Bash.
+/// Rust, Bash, HTML, CSS, JavaScript.
 pub const PROGRAMMING_LANGUAGES: () = ();
 
-/// French (5. Native), English (3. Minimum Professional Proficiency).
+/// French (5. Native), English (3. Minimum Professional Proficiency), Dutch (1. Basic).
 pub const SPOKEN_LANGUAGES: () = ();
 
-/// Git, WASM, CLI, Terminal UI, Platform agnosticism, System, Web, Backend.
+/// Git, WebAssembly, CLI, Terminal UI, Platform agnosticism, System, Web, Backend.
 pub const TECHNOLOGIES: () = ();
 
 // Personal traits
