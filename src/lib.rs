@@ -7,8 +7,8 @@
 //! environments to deliver effective solutions. I’m also an active contributor to open-source
 //! projects and rely on Linux to streamline my development workflow.
 //!
-//! You can find me on [GitHub](https://github.com/yozhgoor),
-//! [Bluesky](https://bsky.app/profile/yozhgoor.bsky.social) and [Mastodon](https://hachyderm.io/@yozhgoor).
+//! You can find me on [GitHub](https://github.com/yozhgoor) and 
+//! [Bluesky](https://bsky.app/profile/yozhgoor.bsky.social).
 //! You can also send me an
 //! [email](mailto:yohan.boogaert+recruit@protonmail.com).
 
