@@ -3,3 +3,7 @@ name = "yohan_boogaert_1995"
 version = "0.12.95"
 edition = "2018"
 authors = ["Yohan Boogaert <yohan.boogaert@protonmail.com"]
+
+[workspace]
+resolver = "2"
+members = [ "xtask" ]
