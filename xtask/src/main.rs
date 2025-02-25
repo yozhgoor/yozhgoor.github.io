@@ -3,10 +3,9 @@ use regex::{Captures, Regex};
 use std::{fs, io::Write, path::Path, process::Command, sync::LazyLock};
 
 const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
-const DESCRIPTION: &str = "Description";
-const TITLE: &str = "Title";
-const HEADING: &str = "Heading";
-const SECTION: &str = "Section";
+const DESCRIPTION: &str = "Yohan Boogaert - Rust Freelance Developer based in Belgium";
+const TITLE: &str = "Yohan Boogaert - Rust Developer";
+const HEADING: &str = "Yohan Boogaert - Rust Developer";
 
 fn main() -> Result<()> {
     let index = Path::new(INDEX);
@@ -60,8 +59,17 @@ fn parse_content(s: impl Into<String>) -> String {
                 // Modify main heading
                 format!("<div class=\"main-heading\"><h1>{}</h1></div>", HEADING)
             } else if caps.get(6).is_some() {
+                let section = match &caps[7] {
+                    "Modules" => "Experiences",
+                    "Macros" => "Personal Projects",
+                    "Structs" => "OSS Contributions",
+                    "Enums" => "Non-technical Skills",
+                    "Constants" => "Technical Skills",
+                    _ => &caps[7],
+                };
+
                 // Modify section headers
-                format!("{}{}{}", &caps[6], SECTION, &caps[8])
+                format!("{}{}{}", &caps[6], section, &caps[8])
             } else if caps.get(9).is_some() {
                 let element = &caps[16].replace("<wbr>", "").to_string();
 
@@ -209,18 +217,45 @@ mod tests {
     #[test]
     fn modify_subtitle() {
         assert_eq!(
-            parse_content("<h2 id=\"element\" class=\"section-header\">Element</h2>"),
-            format!("<h2 id=\"element\" class=\"section-header\">Element</h2>")
+            parse_content(
+                "<h2 id=\"element\" class=\"section-header\">Modules<a href=\"#element\" class=\"anchor\">§</a></h2>"
+            ),
+            "<h2 id=\"element\" class=\"section-header\">Experiences<a href=\"#element\" class=\"anchor\">§</a></h2>"
         );
 
         assert_eq!(
             parse_content(
-                "<h2 id=\"element\" class=\"section-header\">Element<a href=\"#element\" class=\"anchor\">§</a></h2>"
+                "<h2 id=\"element\" class=\"section-header\">Macros<a href=\"#element\" class=\"anchor\">§</a></h2>"
             ),
-            format!(
-                "<h2 id=\"element\" class=\"section-header\">{}<a href=\"#element\" class=\"anchor\">§</a></h2>",
-                SECTION
+            "<h2 id=\"element\" class=\"section-header\">Personal Projects<a href=\"#element\" class=\"anchor\">§</a></h2>"
+        );
+
+        assert_eq!(
+            parse_content(
+                "<h2 id=\"element\" class=\"section-header\">Structs<a href=\"#element\" class=\"anchor\">§</a></h2>"
             ),
+            "<h2 id=\"element\" class=\"section-header\">OSS Contributions<a href=\"#element\" class=\"anchor\">§</a></h2>"
+        );
+
+        assert_eq!(
+            parse_content(
+                "<h2 id=\"element\" class=\"section-header\">Enums<a href=\"#element\" class=\"anchor\">§</a></h2>"
+            ),
+            "<h2 id=\"element\" class=\"section-header\">Non-technical Skills<a href=\"#element\" class=\"anchor\">§</a></h2>"
+        );
+
+        assert_eq!(
+            parse_content(
+                "<h2 id=\"element\" class=\"section-header\">Constants<a href=\"#element\" class=\"anchor\">§</a></h2>"
+            ),
+            "<h2 id=\"element\" class=\"section-header\">Technical Skills<a href=\"#element\" class=\"anchor\">§</a></h2>"
+        );
+
+        assert_eq!(
+            parse_content(
+                "<h2 id=\"element\" class=\"section-header\">Traits<a href=\"#element\" class=\"anchor\">§</a></h2>"
+            ),
+            "<h2 id=\"element\" class=\"section-header\">Traits<a href=\"#element\" class=\"anchor\">§</a></h2>"
         );
     }
 

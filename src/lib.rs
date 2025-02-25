@@ -118,7 +118,7 @@ pub enum OssProjectMaintenance {}
 pub enum ProjectOrganisation {}
 
 /// Continuous Integration via [GitHub Actions](<https://github.com/actions>).
-pub enum SettingUpCI {}
+pub enum ContinuousIntegration {}
 
 /// Web application deployment using [Netlify](<https://www.netlify.com>).
 pub enum WebDeployment {}

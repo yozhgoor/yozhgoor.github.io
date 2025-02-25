@@ -11,10 +11,11 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: doc
+      - name: Clean
+        run: cargo clean
+
+      - name: xtask
+        run: cargo xtask
 
       - name: Redirect
         run: |
