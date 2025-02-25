@@ -36,14 +36,11 @@ fn main() -> Result<()> {
 fn parse_content(s: impl Into<String>) -> String {
     static RE: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(
-            r#"(<nav.*?</nav>)|(<rustdoc-search></rustdoc-search>)|(<meta name="description" content=".*?">)|(<title>.*?</title>)|(<div class="main-heading".*?</div>)|(<h2[^>]*class="section-header"[^>]*>)([^<]*)(<a[^>]*>.*?</a></h2>)"#
+            r#"(<nav.*?</nav>)|(<rustdoc-search></rustdoc-search>)|(<meta name="description" content=".*?">)|(<title>.*?</title>)|(<div class="main-heading".*?</div>)|(<h2[^>]*class="section-header"[^>]*>)([^<]*)(<a[^>]*>.*?</a></h2>)|(<li>\s*<div class="item-name">\s*<a class=")([^"]*)(" href=")([^"]*)(" title=")([^"]*)(">\s*)(.*?)(\s*</a>\s*</div>\s*<div class="desc docblock-short">\s*)(.*?)(?:(<a href="([^"]*)">\[Repository\]</a>)\s*)?(</div>\s*</li>)"#
         ).expect("regex must be compiled")
     });
 
     let mut s = s.into();
-
-    // To modify:
-    // <li><div class="item-name"...</li>
 
     s = RE
         .replace_all(&s, |caps: &Captures| {
@@ -65,6 +62,41 @@ fn parse_content(s: impl Into<String>) -> String {
             } else if caps.get(6).is_some() {
                 // Modify section headers
                 format!("{}{}{}", &caps[6], SECTION, &caps[8])
+            } else if caps.get(9).is_some() {
+                let element = &caps[16].replace("<wbr>", "").to_string();
+
+                let name = if caps.get(10).is_some() {
+                    match &caps[10] {
+                        "element_class" => element.to_lowercase(),
+                        "any_class" => element.to_uppercase(),
+                        /*
+                        "mod" => todo!("modules"),
+                        "macro" => todo!("macro"),
+                        "struct" => todo!("struct"),
+                        "enum" => todo!("enum"),
+                        "constant" => todo!("constant"),
+                        "trait" => todo!("trait"),
+                        */
+                        _ => element.to_string(),
+                    }
+                } else {
+                    element.to_string()
+                };
+
+                format!(
+                    "{}{}{}{}{}{}{}{}{}{}{}",
+                    &caps[9],
+                    &caps[10],
+                    &caps[11],
+                    caps.get(20).map_or("", |m| m.as_str()),
+                    &caps[13],
+                    name,
+                    &caps[15],
+                    name,
+                    &caps[17],
+                    caps.get(18).map_or("", |m| m.as_str()),
+                    &caps[21],
+                )
             } else {
                 caps[0].to_string()
             }
@@ -129,6 +161,23 @@ mod tests {
                 "<h2 id=\"element\" class=\"section-header\">{}<a href=\"#element\" class=\"anchor\">§</a></h2>",
                 SECTION
             ),
+        );
+    }
+
+    #[test]
+    fn modify_elements() {
+        assert_eq!(
+            parse_content(
+                "<li><div class=\"item-name\"><a class=\"element_class\" href=\"element_link\" title=\"element_title\">element</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>"
+            ),
+            "<li><div class=\"item-name\"><a class=\"element_class\" href=\"\" title=\"element\">element</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>"
+        );
+
+        assert_eq!(
+            parse_content(
+                "<li><div class=\"item-name\"><a class=\"any_class\" href=\"macro.any_thing.html\" title=\"title\">any_<wbr>thing</a></div><div class=\"desc docblock-short\">description.<a href=\"https://repo.com/link\">[Repository]</a></div></li>"
+            ),
+            "<li><div class=\"item-name\"><a class=\"any_class\" href=\"https://repo.com/link\" title=\"ANY_THING\">ANY_THING</a></div><div class=\"desc docblock-short\">description.</div></li>"
         );
     }
 }
