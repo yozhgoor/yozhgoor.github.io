@@ -67,16 +67,75 @@ fn parse_content(s: impl Into<String>) -> String {
 
                 let name = if caps.get(10).is_some() {
                     match &caps[10] {
-                        "element_class" => element.to_lowercase(),
-                        "any_class" => element.to_uppercase(),
-                        /*
-                        "mod" => todo!("modules"),
-                        "macro" => todo!("macro"),
-                        "struct" => todo!("struct"),
-                        "enum" => todo!("enum"),
-                        "constant" => todo!("constant"),
-                        "trait" => todo!("trait"),
-                        */
+                        "mod" => {
+                            let parts = element.split('_').collect::<Vec<_>>();
+
+                            match parts.len() {
+                                3 if parts[2] == "current" => format!("{} - Current", parts[1]),
+                                3 => format!("{} - {}", parts[1], parts[2]),
+                                2 => parts[1].to_string(),
+                                _ => element.to_string(),
+                            }
+                        }
+                        "macro" => element.replace('_', "-"),
+                        "struct" => {
+                            let mut result = String::new();
+                            let mut first = true;
+                            for ch in element.chars() {
+                                if ch.is_uppercase() {
+                                    if !first {
+                                        result.push('-');
+                                    }
+                                    result.push(ch.to_ascii_lowercase());
+                                } else {
+                                    result.push(ch);
+                                }
+                                first = false;
+                            }
+                            result
+                        }
+                        "enum" => {
+                            let mut result = String::new();
+                            let mut first = true;
+                            for ch in element.chars() {
+                                if ch.is_uppercase() && !first {
+                                    result.push(' ');
+                                }
+                                result.push(ch);
+                                first = false;
+                            }
+                            result
+                        }
+                        "constant" => element
+                            .replace('_', " ")
+                            .split_whitespace()
+                            .map(|word| {
+                                let mut chars = word.chars();
+                                match chars.next() {
+                                    None => String::new(),
+                                    Some(f) => {
+                                        let first = f.to_uppercase().to_string();
+                                        let chars = chars.collect::<String>().to_lowercase();
+                                        first + &chars
+                                    }
+                                }
+                            })
+                            .collect::<Vec<_>>()
+                            .join(" "),
+                        "trait" => {
+                            let mut result = String::new();
+                            let mut first = true;
+                            for ch in element.chars() {
+                                if ch.is_uppercase() && !first {
+                                    result.push(' ');
+                                    result.push(ch.to_ascii_lowercase());
+                                } else {
+                                    result.push(ch);
+                                }
+                                first = false;
+                            }
+                            result
+                        }
                         _ => element.to_string(),
                     }
                 } else {
@@ -109,6 +168,7 @@ fn parse_content(s: impl Into<String>) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::HashMap;
 
     #[test]
     fn remove_nav() {
@@ -166,18 +226,28 @@ mod tests {
 
     #[test]
     fn modify_elements() {
-        assert_eq!(
-            parse_content(
-                "<li><div class=\"item-name\"><a class=\"element_class\" href=\"element_link\" title=\"element_title\">element</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>"
-            ),
-            "<li><div class=\"item-name\"><a class=\"element_class\" href=\"\" title=\"element\">element</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>"
-        );
+        let mut h = HashMap::new();
 
-        assert_eq!(
-            parse_content(
-                "<li><div class=\"item-name\"><a class=\"any_class\" href=\"macro.any_thing.html\" title=\"title\">any_<wbr>thing</a></div><div class=\"desc docblock-short\">description.<a href=\"https://repo.com/link\">[Repository]</a></div></li>"
-            ),
-            "<li><div class=\"item-name\"><a class=\"any_class\" href=\"https://repo.com/link\" title=\"ANY_THING\">ANY_THING</a></div><div class=\"desc docblock-short\">description.</div></li>"
-        );
+        // Modules
+        h.insert("<li><div class=\"item-name\"><a class=\"mod\" href=\"element_link\" title=\"element_title\">exp01_2020_current</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>".to_string(),"<li><div class=\"item-name\"><a class=\"mod\" href=\"\" title=\"2020 - Current\">2020 - Current</a></div><div class=\"desc docblock-short\">description with <a href=\"link\">a link</a>.</div></li>".to_string());
+
+        // Macros
+        h.insert("<li><div class=\"item-name\"><a class=\"macro\" href=\"macro.any_thing.html\" title=\"another_macro\">super_project</a></div><div class=\"desc docblock-short\">description.<a href=\"https://repo.com/link\">[Repository]</a></div></li>".to_string(), "<li><div class=\"item-name\"><a class=\"macro\" href=\"https://repo.com/link\" title=\"super-project\">super-project</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string());
+
+        // Structs
+        h.insert("<li><div class=\"item-name\"><a class=\"struct\" href=\"struct.another_thing.html\" title=\"another_struct\">SuperProject</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string(), "<li><div class=\"item-name\"><a class=\"struct\" href=\"\" title=\"super-project\">super-project</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string());
+
+        // Enums
+        h.insert("<li><div class=\"item-name\"><a class=\"enum\" href=\"enum.another_enum.html\" title=\"another_enum\">SuperProject</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string(), "<li><div class=\"item-name\"><a class=\"enum\" href=\"\" title=\"Super Project\">Super Project</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string());
+
+        // Constants
+        h.insert("<li><div class=\"item-name\"><a class=\"constant\" href=\"constant.another_constant.html\" title=\"another_constant\">SUPER_PROJECT</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string(), "<li><div class=\"item-name\"><a class=\"constant\" href=\"\" title=\"Super Project\">Super Project</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string());
+
+        // Traits
+        h.insert("<li><div class=\"item-name\"><a class=\"trait\" href=\"trait.another_trait.html\" title=\"another_trait\">SuperProject</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string(), "<li><div class=\"item-name\"><a class=\"trait\" href=\"\" title=\"Super project\">Super project</a></div><div class=\"desc docblock-short\">description.</div></li>".to_string());
+
+        for (key, value) in h.into_iter() {
+            assert_eq!(parse_content(key), value)
+        }
     }
 }
