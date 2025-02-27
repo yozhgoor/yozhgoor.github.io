@@ -7,7 +7,7 @@
 //! environments to deliver effective solutions. I’m also an active contributor to open-source
 //! projects and rely on Linux to streamline my development workflow.
 //!
-//! You can find me on [GitHub](https://github.com/yozhgoor) and 
+//! You can find me on [GitHub](https://github.com/yozhgoor) and
 //! [Bluesky](https://bsky.app/profile/yozhgoor.bsky.social).
 //! You can also send me an
 //! [email](mailto:yohan.boogaert+recruit@protonmail.com).
@@ -19,8 +19,8 @@
 pub mod exp04_2014_2020 {}
 
 /// First job with hands on the keyboard at RustMinded. Discovering the OSS
-/// world when learning how to become an Rustacean.
-pub mod exp03_2020_2022 {}
+/// world when learning how to become an Rustacean. Now working as Rust Developer Consultant.
+pub mod exp03_2020_current {}
 
 /// Freelance mission as a Rust Developer at Cumul.io rewriting in Rust a query engine for data
 /// analytics using faster and more efficient queries and improving the relation of multiple
@@ -36,7 +36,7 @@ pub mod exp01_2022_2025 {}
 
 /// A CLI tool that allows you to create a temporary new Rust project using
 /// cargo with already installed dependencies.
-/// [\[Repository\]](<https://github.com/rustminded/cargo-temp>)
+/// [\[Repository\]](<https://github.com/yozhgoor/cargo-temp>)
 #[macro_export]
 macro_rules! cargo_temp {
     () => {};
@@ -64,11 +64,6 @@ macro_rules! yewprint_playground {
 /// [\[Repository\]](<https://github.com/cargo-generate/cargo-generate>)
 pub struct CargoGenerate {}
 
-/// Compare a crate's public API between two different branches and suggests next version 
-/// according to semver.
-/// [\[\Repository\]](<https://github.com/iomentum/cargo-breaking>)
-pub struct CargoBreaking {}
-
 /// Date and Time for Rust.
 /// [\[Repository\]](<https://github.com/chronotope/chrono>)
 pub struct Chrono {}
@@ -79,13 +74,12 @@ pub struct RustBookFr {}
 
 /// Third-I, the only camera that replicates your hearing and your point of
 /// view.
-/// [\[Repository\]](<https://github.com/BigBoySystems/third-i-frontend>) |
-/// [\[Site\]](<https://bigboysystems.com/>)
+/// [\[Repository\]](<https://github.com/BigBoySystems/third-i-frontend>)
 pub struct ThirdIFrontend {}
 
 /// TopoJSON bindings and utilities for Rust.
 /// [\[Repository\]](<https://github.com/georust/topojson>)
-pub struct TopoJson {}
+pub struct Topojson {}
 
 /// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)
 /// for your WASM project.
@@ -113,10 +107,6 @@ pub struct ImplicitClone {}
 /// [\[Repository\]](<https://github.com/rust-disk-partition-management/gptman>)
 pub struct Gptman {}
 
-/// MBR Partition management.
-/// [\[Repository\]](<https://github.com/rust-disk-partition-management/mbrman>)
-pub struct Mbrman {}
-
 // Non-technical skills
 
 /// Release, update and maintenance of an OSS project.
@@ -128,14 +118,14 @@ pub enum OssProjectMaintenance {}
 pub enum ProjectOrganisation {}
 
 /// Continuous Integration via [GitHub Actions](<https://github.com/actions>).
-pub enum SettingUpCI {}
+pub enum ContinuousIntegration {}
 
 /// Web application deployment using [Netlify](<https://www.netlify.com>).
 pub enum WebDeployment {}
 
 // Technical skills
 
-/// Yew, Rocket, Axum, Actix.
+/// Yew, Rocket, Axum, Actix, Tokio, sqlx.
 pub const FRAMEWORKS: () = ();
 
 /// Nixos, Arch Linux, Pop!_OS, macOS, Windows, Debian, Tails.
