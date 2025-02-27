@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1"
-regex = "1"
+dom_query = "0.14"

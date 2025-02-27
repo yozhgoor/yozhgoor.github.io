@@ -79,7 +79,7 @@ pub struct ThirdIFrontend {}
 
 /// TopoJSON bindings and utilities for Rust.
 /// [\[Repository\]](<https://github.com/georust/topojson>)
-pub struct TopoJson {}
+pub struct Topojson {}
 
 /// Customizable commands based on [xtask](https://github.com/matklad/cargo-xtask)
 /// for your WASM project.
