@@ -47,6 +47,10 @@ fn manipulate_document(doc: &Document) -> Result<()> {
     let nav = doc.select("nav");
     nav.remove();
 
+    // Remove sidebar resizer
+    let side = doc.select("div.sidebar-resizer");
+    side.remove();
+
     // Remove search bar
     let search = doc.select_single("rustdoc-search");
     search.remove();
@@ -75,7 +79,6 @@ fn manipulate_document(doc: &Document) -> Result<()> {
     }
 
     // Change list items
-    // <li><div class="item-name"><a class="mod" href="index.html" title="title">exp01_<wbr>2022_<wbr>2025</a></div><div class="desc docblock-short">description</div></li>
     let items = doc.select("li:has(div.item-name)");
 
     for item in items.iter() {
@@ -146,7 +149,7 @@ fn manipulate_document(doc: &Document) -> Result<()> {
                     })
                     .collect::<Vec<_>>()
                     .join(" "),
-                "traits" => {
+                "trait" => {
                     let mut result = String::new();
                     let mut first = true;
                     for ch in name_text.chars() {
