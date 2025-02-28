@@ -2,13 +2,14 @@ use anyhow::{Context, Result, bail};
 use dom_query::Document;
 use std::{fs, io::Write, path::Path, process::Command};
 
-const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
+const INDEX_DIR: &str = "target/doc/yohan_boogaert_1995";
 const DESCRIPTION: &str = "Rust Freelance Developer based in Belgium.";
 const TITLE: &str = "Rust Developer - Yohan Boogaert";
 const HEADING: &str = "Yohan Boogaert - Rust Developer";
 
 fn main() -> Result<()> {
-    let index = Path::new(INDEX);
+    let index = Path::new(INDEX_DIR).join("index.html");
+    let input = Path::new(INDEX_DIR).join("input.html");
 
     if !index.exists() {
         match Command::new("cargo").arg("doc").status() {
@@ -17,31 +18,64 @@ fn main() -> Result<()> {
         }
     }
 
-    let document = Document::from(fs::read_to_string(index).context("failed to read index file")?);
+    clean_target(INDEX_DIR).context("failed to clean target directory")?;
 
-    manipulate_document(&document).context("failed to manipulate document")?;
+    let document = Document::from(fs::read_to_string(&index).context("failed to read index file")?);
 
-    let mut file = fs::OpenOptions::new()
-        .write(true)
-        .truncate(true)
-        .open(index)
-        .context("failed to open index file")?;
-
-    file.write_all(document.html().as_bytes())?;
-
-    println!("Generated successfully");
+    manage_document(&index, document.clone(), false).context("failed to modify index file")?;
+    manage_document(&input, document, true).context("failed to create `input.html`")?;
 
     Ok(())
 }
 
-fn manipulate_document(doc: &Document) -> Result<()> {
+fn manage_document(path: &Path, document: Document, full: bool) -> Result<()> {
+    let content = manipulate_document(document, full).context("failed to manipulate document")?;
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .create(full)
+        .open(path)
+        .context(format!("failed to open file at {}", path.display()))?;
+
+    file.write_all(content.html().as_bytes())?;
+
+    println!("File generated successfully: {}", path.display());
+
+    Ok(())
+}
+
+fn clean_target(path: &str) -> Result<()> {
+    let entries = fs::read_dir(path)?;
+
+    for entry in entries {
+        let entry = entry.context("failed to read entry")?;
+        let path = entry.path();
+
+        if path.is_dir() {
+            fs::remove_dir_all(&path)?;
+        } else if path.is_file() {
+            let file_name = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            if file_name != "input.html" && file_name != "index.html" {
+                fs::remove_file(&path)?;
+            }
+        }
+    }
+
+    Ok(())
+}
+
+fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     // Change description
     let meta = doc.select_single("head meta[name=description]");
     meta.set_attr("content", DESCRIPTION);
 
     // Change title
     let title = doc.select_single("head title");
-    title.set_html(TITLE);
+    if full {
+        title.remove();
+    } else {
+        title.set_html(TITLE);
+    }
 
     // Remove navigation bar
     let nav = doc.select("nav");
@@ -59,6 +93,12 @@ fn manipulate_document(doc: &Document) -> Result<()> {
     let heading = doc.select_single("div.main-heading");
     heading.set_html(format!("<h1>{}</h1>", HEADING));
 
+    // Remove element around introduction
+    let details = doc.select_single("details.top-doc");
+    let p = details.select_single("p");
+
+    details.replace_with_selection(&p);
+
     // Change section headers
     let headers = doc.select("h2.section-header");
 
@@ -75,7 +115,11 @@ fn manipulate_document(doc: &Document) -> Result<()> {
             _ => text.as_ref(),
         };
 
-        header.set_html(format!("{}{}", txt, a.html()));
+        if full {
+            header.set_html(txt);
+        } else {
+            header.set_html(format!("{}{}", txt, a.html()));
+        }
     }
 
     // Change list items
@@ -121,6 +165,9 @@ fn manipulate_document(doc: &Document) -> Result<()> {
                         result
                     }
                 }
+                "enum" if name_text == "OssProjectMaintenance" => {
+                    "OSS Project Maintenance".to_string()
+                }
                 "enum" => {
                     let mut result = String::new();
                     let mut first = true;
@@ -133,6 +180,7 @@ fn manipulate_document(doc: &Document) -> Result<()> {
                     }
                     result
                 }
+                "constant" if name_text == "OS" => name_text.to_string(),
                 "constant" => name_text
                     .replace('_', " ")
                     .split_whitespace()
@@ -181,5 +229,32 @@ fn manipulate_document(doc: &Document) -> Result<()> {
         desc_a.remove();
     }
 
-    Ok(())
+    // Specific to `input.html`
+    if full {
+        // Remove the `traits` section from the input.html
+        let header = doc.select_single("h2[id=traits]");
+        let ul = doc.select("ul.item-table:has(a[class=trait])");
+
+        header.remove();
+        ul.remove();
+
+        // Simplify list items
+        let li = doc.select("li:has(div.item-name)");
+        for item in li.iter() {
+            let a = item.select_single("a");
+            let div = item.select("div.desc");
+
+            if let Some(class) = a.attr("class") {
+                let line = if class.as_ref() == "trait" {
+                    a.text().to_string()
+                } else {
+                    format!("{} - {}", a.text(), div.inner_html())
+                };
+
+                item.set_html(line);
+            }
+        }
+    }
+
+    Ok(doc)
 }
