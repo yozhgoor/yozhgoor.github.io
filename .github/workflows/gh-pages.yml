@@ -24,15 +24,12 @@ jobs:
             -t pdf
             --pdf-engine=xelatex
             -V geometry:margin=0.5in
-            -o target/doc/output.pdf
+            -o target/doc/resume.pdf
+            --include-in-header=<(echo '\\pagestyle{empty}')
+            --include-after-body=<(echo '\\vspace{0.5}in'\\begin{center}Full version available at https://yozhgoor.github.io\\end{center}')
             target/doc/input.html
 
       - run: rm target/doc/input.html
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: output
-          path: target/doc/output.pdf
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
