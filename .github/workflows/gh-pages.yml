@@ -17,9 +17,22 @@ jobs:
       - name: xtask
         run: cargo xtask
 
-      - name: Redirect
-        run: |
-          echo '<meta http-equiv="refresh" content="0;url=yohan_boogaert_1995/">' > target/doc/index.html
+      - uses: docker://pandoc/latex:3.5
+        with:
+          args: >-
+            -f html
+            -t pdf
+            --pdf-engine=xelatex
+            -V geometry:margin=0.5in
+            -o target/doc/output.pdf
+            target/doc/input.html
+
+      - run: rm target/doc/input.html
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: output
+          path: target/doc/output.pdf
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
