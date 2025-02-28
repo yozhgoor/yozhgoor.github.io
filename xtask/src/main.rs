@@ -1,15 +1,19 @@
 use anyhow::{Context, Result, bail};
 use dom_query::Document;
-use std::{fs, io::Write, path::Path, process::Command};
+use std::{
+    fs,
+    io::Write,
+    path::{Component, Path, PathBuf},
+    process::Command,
+};
 
-const INDEX_DIR: &str = "target/doc/yohan_boogaert_1995";
+const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
 const DESCRIPTION: &str = "Rust Freelance Developer based in Belgium.";
 const TITLE: &str = "Rust Developer - Yohan Boogaert";
 const HEADING: &str = "Yohan Boogaert - Rust Developer";
 
 fn main() -> Result<()> {
-    let index = Path::new(INDEX_DIR).join("index.html");
-    let input = Path::new(INDEX_DIR).join("input.html");
+    let index = Path::new(INDEX);
 
     if !index.exists() {
         match Command::new("cargo").arg("doc").status() {
@@ -18,12 +22,14 @@ fn main() -> Result<()> {
         }
     }
 
-    clean_target(INDEX_DIR).context("failed to clean target directory")?;
+    let document = Document::from(fs::read_to_string(index).context("failed to read index file")?);
 
-    let document = Document::from(fs::read_to_string(&index).context("failed to read index file")?);
+    manage_document(Path::new("target/doc/index.html"), document.clone(), false)
+        .context("failed to modify index file")?;
+    manage_document(Path::new("target/doc/input.html"), document, true)
+        .context("failed to create `input.html`")?;
 
-    manage_document(&index, document.clone(), false).context("failed to modify index file")?;
-    manage_document(&input, document, true).context("failed to create `input.html`")?;
+    clean_target().context("failed to clean target directory")?;
 
     Ok(())
 }
@@ -33,7 +39,7 @@ fn manage_document(path: &Path, document: Document, full: bool) -> Result<()> {
     let mut file = fs::OpenOptions::new()
         .write(true)
         .truncate(true)
-        .create(full)
+        .create(true)
         .open(path)
         .context(format!("failed to open file at {}", path.display()))?;
 
@@ -44,15 +50,33 @@ fn manage_document(path: &Path, document: Document, full: bool) -> Result<()> {
     Ok(())
 }
 
-fn clean_target(path: &str) -> Result<()> {
-    let entries = fs::read_dir(path)?;
+fn clean_target() -> Result<()> {
+    let doc_path = Path::new("target/doc");
 
-    for entry in entries {
-        let entry = entry.context("failed to read entry")?;
+    for entry in fs::read_dir(doc_path)? {
+        let entry = entry?;
         let path = entry.path();
 
         if path.is_dir() {
-            fs::remove_dir_all(&path)?;
+            if !path.ends_with("static.files") {
+                fs::remove_dir_all(&path)?;
+            } else {
+                for e in fs::read_dir(path)? {
+                    let e = e?;
+                    let p = e.path();
+
+                    if let Some(file_name) = p.file_name() {
+                        if let Some(s) = file_name.to_str() {
+                            if !s.contains("rustdoc")
+                                && !s.contains("favicon")
+                                && !s.contains("Fira")
+                            {
+                                fs::remove_file(&p)?;
+                            }
+                        }
+                    }
+                }
+            }
         } else if path.is_file() {
             let file_name = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
             if file_name != "input.html" && file_name != "index.html" {
@@ -65,6 +89,37 @@ fn clean_target(path: &str) -> Result<()> {
 }
 
 fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
+    // Force dark theme
+    let html = doc.select_single("html");
+    html.set_attr("data-theme", "dark");
+
+    // Remove unused meta elements
+    let meta = doc.select("head meta[name=generator],head meta[name=rustdoc-vars]");
+    meta.remove();
+
+    // Adapt link elements `href`s
+    for link in doc.select("link").iter() {
+        let href = link
+            .attr("href")
+            .expect("selected link have href")
+            .to_string();
+
+        let path = Path::new(&href)
+            .components()
+            .filter(|c| *c != Component::ParentDir)
+            .collect::<PathBuf>();
+
+        let s = path.as_os_str().to_str().expect("can convert path");
+
+        if s.contains("rustdoc") || s.contains("icon") {
+            link.set_attr("href", s);
+        } else {
+            link.remove();
+        }
+
+        link.set_attr("href", path.as_os_str().to_str().expect("can convert path"));
+    }
+
     // Change description
     let meta = doc.select_single("head meta[name=description]");
     meta.set_attr("content", DESCRIPTION);
@@ -77,17 +132,9 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
         title.set_html(TITLE);
     }
 
-    // Remove navigation bar
-    let nav = doc.select("nav");
-    nav.remove();
-
-    // Remove sidebar resizer
-    let side = doc.select("div.sidebar-resizer");
-    side.remove();
-
-    // Remove search bar
-    let search = doc.select_single("rustdoc-search");
-    search.remove();
+    // Remove unused elements
+    let unused = doc.select("script,noscript,nav,rustdoc-search,div.sidebar-resizer");
+    unused.remove();
 
     // Change main heading
     let heading = doc.select_single("div.main-heading");
@@ -95,14 +142,12 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
 
     // Remove element around introduction
     let details = doc.select_single("details.top-doc");
-    let p = details.select_single("p");
+    let p = details.select("p");
 
     details.replace_with_selection(&p);
 
     // Change section headers
-    let headers = doc.select("h2.section-header");
-
-    for header in headers.iter() {
+    for header in doc.select("h2.section-header").iter() {
         let a = header.select_single("a");
         let text = header.immediate_text().to_string();
 
@@ -123,9 +168,7 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     }
 
     // Change list items
-    let items = doc.select("li:has(div.item-name)");
-
-    for item in items.iter() {
+    for item in doc.select("li:has(div.item-name)").iter() {
         let item_name = item.select("div.item-name");
         let name_a = item_name.select("a");
         let name_text = name_a.immediate_text().replace("<wbr>", "");
@@ -239,8 +282,7 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
         ul.remove();
 
         // Simplify list items
-        let li = doc.select("li:has(div.item-name)");
-        for item in li.iter() {
+        for item in doc.select("li:has(div.item-name)").iter() {
             let a = item.select_single("a");
             let div = item.select("div.desc");
 
