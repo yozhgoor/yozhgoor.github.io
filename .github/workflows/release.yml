@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - uses: docker://pandoc/latex:3.5
+        with:
+          args: >-
+            -f html
+            -t pdf
+            --pdf-engine=xelatex
+            -V geometry:margin=0.5in
+            -o target/doc/yohan_boogaert_(rust)_developer.pdf
+            target/doc/input.html
+            --include-in-header=<(echo '\pagestyle{empty}')
+            --include-after-body=<(echo '\vspace{0.5in}\begin{center}Full Version available at http://yozhgoor.github.io\end{center}'
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: target/doc/yohan_boogart_(rust)_developer.pdf
