@@ -5,7 +5,7 @@
 
 //! Along the way, I’ve gained practical experience with JavaScript and TypeScript, working in team
 //! environments to deliver effective solutions. I’m also an active contributor to open-source
-//! projects and rely on Linux to streamline my development workflow.
+//! projects and rely on Linux for my development workflow.
 //!
 //! You can find me on [GitHub](https://github.com/yozhgoor) and
 //! [Bluesky](https://bsky.app/profile/yozhgoor.bsky.social).

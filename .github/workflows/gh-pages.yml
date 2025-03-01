@@ -22,14 +22,11 @@ jobs:
           args: >-
             -f html
             -t pdf
-            --pdf-engine=xelatex
-            -V geometry:margin=0.5in
-            -o target/doc/resume.pdf
-            --include-in-header=<(echo '\\pagestyle{empty}')
-            --include-after-body=<(echo '\\vspace{0.5}in'\\begin{center}Full version available at https://yozhgoor.github.io\\end{center}')
+            --template=target/doc/template.tex
+            --output=target/doc/resume.pdf
             target/doc/input.html
 
-      - run: rm target/doc/input.html
+      - run: rm target/doc/input.html target/doc/template.tex
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

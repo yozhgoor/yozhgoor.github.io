@@ -8,6 +8,7 @@ use std::{
 };
 
 const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
+const DOC: &str = "target/doc";
 const DESCRIPTION: &str = "Rust Freelance Developer based in Belgium.";
 const TITLE: &str = "Rust Developer - Yohan Boogaert";
 const HEADING: &str = "Yohan Boogaert - Rust Developer";
@@ -24,12 +25,14 @@ fn main() -> Result<()> {
 
     let document = Document::from(fs::read_to_string(index).context("failed to read index file")?);
 
-    manage_document(Path::new("target/doc/index.html"), document.clone(), false)
+    manage_document(&Path::new(DOC).join("index.html"), document.clone(), false)
         .context("failed to modify index file")?;
-    manage_document(Path::new("target/doc/input.html"), document, true)
+    manage_document(&Path::new(DOC).join("input.html"), document, true)
         .context("failed to create `input.html`")?;
 
     clean_target().context("failed to clean target directory")?;
+
+    create_template().context("failed to create template")?;
 
     Ok(())
 }
@@ -51,7 +54,7 @@ fn manage_document(path: &Path, document: Document, full: bool) -> Result<()> {
 }
 
 fn clean_target() -> Result<()> {
-    let doc_path = Path::new("target/doc");
+    let doc_path = Path::new(DOC);
 
     for entry in fs::read_dir(doc_path)? {
         let entry = entry?;
@@ -142,7 +145,7 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
 
     // Remove element around introduction
     let details = doc.select_single("details.top-doc");
-    let p = details.select("p");
+    let p = doc.select("p");
 
     details.replace_with_selection(&p);
 
@@ -285,18 +288,61 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
         for item in doc.select("li:has(div.item-name)").iter() {
             let a = item.select_single("a");
             let div = item.select("div.desc");
-
             if let Some(class) = a.attr("class") {
                 let line = if class.as_ref() == "trait" {
                     a.text().to_string()
                 } else {
-                    format!("{} - {}", a.text(), div.inner_html())
+                    format!("{} - {}", a.html(), div.inner_html())
                 };
 
                 item.set_html(line);
-            }
+            };
         }
     }
 
     Ok(doc)
+}
+
+fn create_template() -> Result<()> {
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .create(true)
+        .open(Path::new(DOC).join("template.tex"))
+        .context("failed to open template")?;
+
+    let content = r#"\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\geometry{margin=0.5in}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\setcounter{secnumdepth}{0}
+
+\setlist[itemize]{label=}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+$body$
+
+\begin{center}
+Full version available at \url{https://yozhgoor.github.io}
+\end{center}
+
+\end{document}"#;
+
+    file.write_all(content.as_bytes())?;
+
+    Ok(())
 }
