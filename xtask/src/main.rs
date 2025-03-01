@@ -314,7 +314,6 @@ fn create_template() -> Result<()> {
     let content = r#"\documentclass{article}
 
 \usepackage{geometry}
-\usepackage{enumitem}
 \usepackage{hyperref}
 
 \geometry{margin=0.5in}
@@ -324,18 +323,18 @@ fn create_template() -> Result<()> {
   urlcolor=blue,
 }
 
+\pagestyle{empty}
+
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \setcounter{secnumdepth}{0}
-
-\setlist[itemize]{label=}
-
 \setlength{\parindent}{0pt}
 
 \begin{document}
 
 $body$
 
+\vspace{0.3in}
 \begin{center}
 Full version available at \url{https://yozhgoor.github.io}
 \end{center}
