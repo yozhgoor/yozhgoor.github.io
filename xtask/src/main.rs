@@ -270,6 +270,8 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
 
         if let Some(href) = desc_a.attr("href") {
             name_a.set_attr("href", &href);
+        } else {
+            name_a.set_attr("href", "javascript:void(0)");
         }
 
         // Remove `[Repository]` links
