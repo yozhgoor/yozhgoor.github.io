@@ -73,6 +73,7 @@ fn clean_target() -> Result<()> {
                             if !s.contains("rustdoc")
                                 && !s.contains("favicon")
                                 && !s.contains("Fira")
+                                && !s.contains("COPYRIGHT")
                             {
                                 fs::remove_file(&p)?;
                             }
@@ -298,6 +299,9 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
                 item.set_html(line);
             };
         }
+    } else {
+        let section = doc.select_single("section.content");
+        section.append_html(r#"<p style="text-align:center;">PDF version available <a href="resume.pdf">here</a>.</p>"#);
     }
 
     Ok(doc)
