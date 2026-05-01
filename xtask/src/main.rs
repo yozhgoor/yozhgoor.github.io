@@ -172,10 +172,10 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     }
 
     // Change list items
-    for item in doc.select("li:has(div.item-name)").iter() {
-        let item_name = item.select("div.item-name");
-        let name_a = item_name.select("a");
+    for item in doc.select("dl.item-table > dt:has(a[class])").iter() {
+        let name_a = item.select_single("a");
         let name_text = name_a.immediate_text().replace("<wbr>", "");
+        let description = item.next_sibling();
 
         // Modify the name depending on the class
         if let Some(class) = name_a.attr("class") {
@@ -265,7 +265,6 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
             name_a.set_text(&name);
         }
 
-        let description = item.select("div.desc");
         let desc_a = description.select("a:has-text(\"[Repository]\")");
 
         if let Some(href) = desc_a.attr("href") {
@@ -282,25 +281,27 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     if full {
         // Remove the `traits` section from the input.html
         let header = doc.select_single("h2[id=traits]");
-        let ul = doc.select("ul.item-table:has(a[class=trait])");
+        let list = doc.select("dl.item-table:has(a[class=trait])");
 
         header.remove();
-        ul.remove();
+        list.remove();
 
         // Simplify list items
-        for item in doc.select("li:has(div.item-name)").iter() {
+        for item in doc.select("dl.item-table > dt:has(a)").iter() {
             let a = item.select_single("a");
-            let div = item.select("div.desc");
+            let desc = item.next_sibling();
+
             if let Some(class) = a.attr("class") {
                 let line = if class.as_ref() == "trait" {
                     a.text().to_string()
                 } else {
-                    format!("{} - {}", a.html(), div.inner_html())
+                    format!("{} - {}", a.html(), desc.inner_html())
                 };
 
                 item.set_html(line);
             };
         }
+        doc.select("dl.item-table > dd").remove();
     } else {
         let section = doc.select_single("section.content");
         section.append_html(r#"<p style="text-align:center;">PDF version available <a href="resume.pdf">here</a>.</p>"#);
