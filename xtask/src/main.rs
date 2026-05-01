@@ -9,9 +9,9 @@ use std::{
 
 const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
 const DOC: &str = "target/doc";
-const DESCRIPTION: &str = "Rust Freelance Developer based in Belgium.";
-const TITLE: &str = "Rust Developer - Yohan Boogaert";
-const HEADING: &str = "Yohan Boogaert - Rust Developer";
+const DESCRIPTION: &str = "Rust Software Developer based in Belgium.";
+const TITLE: &str = "Rust Software Developer - Yohan Boogaert";
+const HEADING: &str = "Yohan Boogaert - Rust Software Developer";
 
 fn main() -> Result<()> {
     let index = Path::new(INDEX);
