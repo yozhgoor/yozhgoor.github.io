@@ -70,13 +70,6 @@ macro_rules! xtask_no_warnings {
     () => {};
 }
 
-/// Stats generator for GitHub profile README.
-/// [\[Repository\]](<https://github.com/yozhgoor/readme-svg-stats>)
-#[macro_export]
-macro_rules! readme_svg_stats {
-    () => {};
-}
-
 // OSS Contributions
 
 /// A developer tool for bootstrapping new Rust projects from existing git templates.
