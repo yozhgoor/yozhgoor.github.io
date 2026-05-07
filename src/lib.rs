@@ -1,69 +1,70 @@
-//! I started working with Rust in 2020 at [RustMinded](https://github.com/rustminded), where I
-//! built a strong foundation in the language and the open-source ecosystem. Since then, I've built
-//! Rust software across backend, systems, and developer tooling in both product and consulting
-//! environments.
-
-//! Along the way, I've gained practical experience with JavaScript and TypeScript in
-//! collaborative teams, and I continue to contribute to open-source projects while using
-//! Linux as my primary development platform.
+//! Rust software developer based in Belgium, available for freelance missions and full-time
+//! opportunities in remote or hybrid settings.
 //!
-//! You can find me on [GitHub](https://github.com/yozhgoor) and
-//! [Mastodon](https://mastodon.social/@yoz@hachyderm.io).
-//! You can also send me an
-//! [email](mailto:yohan.boogaert+recruit@protonmail.com).
+//! I design and build production Rust software end-to-end across consulting and product
+//! environments, from systems programming and backend services to developer tooling and team
+//! training, with a strong emphasis on architecture, reliability, and long-term maintainability.
+//!
+//! I am an active contributor and maintainer in the Rust open-source ecosystem, and I regularly
+//! participate in community events such as meetups and conferences.
+//!
+//! [LinkedIn][linkedin] · [GitHub][github] · [Mastodon][mastodon] · [Email][email]
+//!
+//! [linkedin]: https://www.linkedin.com/in/yohan-boogaert
+//! [github]: https://github.com/yozhgoor
+//! [mastodon]: https://mastodon.social/@yoz@hachyderm.io
+//! [email]: mailto:yohan.boogaert+recruit@protonmail.com
 
 // Jobs
 
-/// Rust Developer role at RustMinded, evolving into consulting through open-source collaboration
-/// and production-focused engineering on Rust software.
-pub mod exp01_2020_current {}
+/// Rust Developer (freelance) at Ystorian, building a cybersecurity platform that collects BIOS,
+/// kernel, OS, and network data in parallel across multiple systems to assess vulnerabilities and
+/// compliance, enabling reliable analysis at scale.
+pub mod exp01_jul_2022_jan_2025 {}
 
-/// Freelance mission as a Rust Developer at Cumul.io (now Luzmo), contributing to a Rust rewrite
-/// of a data analytics query engine to improve performance and service interoperability in an AWS
-/// microservices environment.
-pub mod exp02_2022 {}
+/// Rust Developer (freelance) at Cumul.io (now Luzmo), collaborating with the CTO and backend team
+/// on a Rust rewrite of a data analytics query engine to increase performance and microservices
+/// interoperability in an AWS environment, while also leading Rust training for engineers from
+/// diverse backgrounds.
+pub mod exp02_mar_2022_jul_2022 {}
 
-/// Freelance mission as a Rust Developer at Ystorian, working on a cybersecurity platform that
-/// gathers BIOS, kernel, OS, and network information in parallel to assess vulnerabilities and
-/// compliance across multiple systems.
-pub mod exp03_2022_2025 {}
-
-/// Multiple jobs with hands on the wheel (emergency response driver, airport shuttle, taxi,...).
-pub mod exp04_2014_2020 {}
+/// Rust Developer at RustMinded, evolving into consulting through open-source
+/// collaboration and production-focused Rust engineering across client missions.
+pub mod exp03_mar_2021_current {}
 
 // Personal Projects
 
-/// A CLI tool to create temporary Rust projects with pre-installed dependencies for faster
-/// prototyping and experiments.
+/// A CLI tool to spin up temporary Rust projects with pre-installed dependencies for quick
+/// prototyping and experimentation.
 /// [\[Repository\]](<https://github.com/yozhgoor/cargo-temp>)
 #[macro_export]
 macro_rules! cargo_temp {
     () => {};
 }
 
-/// A Windows process-management library with an API inspired by `std::process`, built on top of
-/// the Win32 API.
+/// A Windows process-management library built on the Win32 API, offering an interface consistent
+/// with `std::process`.
 /// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
 #[macro_export]
 macro_rules! create_process_w {
     () => {};
 }
 
-/// A CLI tool to help manage Rust project workflows efficiently.
+/// A CLI tool to manage and streamline Rust project workflows.
 /// [\[Repository\]](<https://github.com/yozhgoor/cargo-flow>)
 #[macro_export]
 macro_rules! cargo_flow {
     () => {};
 }
 
-/// Simple auto-grid layout utility for ratatui TUI applications.
+/// Automatic grid layout utility for ratatui TUI applications.
 /// [\[Repository\]](<https://github.com/yozhgoor/ratatui-auto-grid>)
 #[macro_export]
 macro_rules! ratatui_auto_grid {
     () => {};
 }
 
-/// Silence warnings in xtask-based builds without invalidating the dependency cache.
+/// A utility to suppress warnings in xtask-based builds without invalidating the dependency cache.
 /// [\[Repository\]](<https://github.com/yozhgoor/xtask-no-warnings>)
 #[macro_export]
 macro_rules! xtask_no_warnings {
@@ -120,51 +121,30 @@ pub struct Gptman {}
 /// [\[Repository\]](<https://github.com/rust-disk-partition-management/mbrman>)
 pub struct Mbrman {}
 
-// Non-technical skills
-
-/// Open-source project maintenance, including releases and iterative updates.
-pub enum OssProjectMaintenance {}
-
-/// Project organisation using
-/// [GitHub Project](<https://docs.github.com/en/issues/trying-out-the-new-projects-experience/about-projects>)
-/// and repository [settings](<https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features>).
-pub enum ProjectOrganisation {}
-
-/// Continuous Integration workflows with [GitHub Actions](<https://github.com/actions>).
-pub enum ContinuousIntegration {}
-
-/// Web application deployment.
-pub enum WebDeployment {}
-
-// Technical skills
-
-/// Yew, Rocket, Axum, Actix, Tokio, sqlx, Ratatui.
-pub const FRAMEWORKS: () = ();
-
-/// NixOS, Arch Linux, macOS, Windows.
-pub const OS: () = ();
-
-/// Rust, Bash, HTML, CSS, JavaScript, TypeScript, Python, C.
-pub const PROGRAMMING_LANGUAGES: () = ();
+// Professional Skills
 
 /// French (Native), English (Professional Proficiency), Dutch (Basic).
-pub const SPOKEN_LANGUAGES: () = ();
+pub enum SpokenLanguages {}
 
-/// Git, WebAssembly, CLI, terminal UI, cross-platform development, systems, web, backend.
-pub const TECHNOLOGIES: () = ();
+/// Managing project boards and repository settings.
+pub enum ProjectOrganisation {}
 
-// Personal traits
+/// Managing releases and iterative updates for open-source projects.
+pub enum OpenSourceMaintenance {}
 
-pub trait Autodidact {}
+// Technical Skills
 
-pub trait Enthusiast {}
+/// Rust, Bash, JavaScript, TypeScript, Python, C, SQL, HTML, CSS, Nix, Lua.
+pub const LANGUAGES: () = ();
 
-pub trait Flexible {}
+/// Yew, Rocket, Axum, Actix, Tokio, sqlx, Ratatui.
+pub const FRAMEWORKS_AND_LIBRARIES: () = ();
 
-pub trait Passionate {}
+/// Git, GitHub Actions (CI/CD), GitHub Projects, Neovim.
+pub const TOOLS: () = ();
 
-pub trait TeamPlayer {}
+/// WebAssembly, CLI, TUI, cross-platform, Windows API, Web, Backend, Systems.
+pub const PLATFORMS: () = ();
 
-pub trait WantToBuild {}
-
-pub trait WantToLearn {}
+/// NixOS, Arch Linux, macOS, Windows.
+pub const OPERATING_SYSTEMS: () = ();
