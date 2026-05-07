@@ -10,7 +10,6 @@ use std::{
 const INDEX: &str = "target/doc/yohan_boogaert_1995/index.html";
 const DOC: &str = "target/doc";
 const DESCRIPTION: &str = "Rust Software Developer based in Belgium.";
-const TITLE: &str = "Rust Software Developer - Yohan Boogaert";
 const HEADING: &str = "Yohan Boogaert - Rust Software Developer";
 
 fn main() -> Result<()> {
@@ -68,16 +67,14 @@ fn clean_target() -> Result<()> {
                     let e = e?;
                     let p = e.path();
 
-                    if let Some(file_name) = p.file_name() {
-                        if let Some(s) = file_name.to_str() {
-                            if !s.contains("rustdoc")
-                                && !s.contains("favicon")
-                                && !s.contains("Fira")
-                                && !s.contains("COPYRIGHT")
-                            {
-                                fs::remove_file(&p)?;
-                            }
-                        }
+                    if let Some(file_name) = p.file_name()
+                        && let Some(s) = file_name.to_str()
+                        && !s.contains("rustdoc")
+                        && !s.contains("favicon")
+                        && !s.contains("Fira")
+                        && !s.contains("COPYRIGHT")
+                    {
+                        fs::remove_file(&p)?;
                     }
                 }
             }
@@ -93,6 +90,20 @@ fn clean_target() -> Result<()> {
 }
 
 fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
+    apply_document_basics(&doc, full);
+    rewrite_section_headers(&doc, full);
+    rewrite_item_table(&doc);
+
+    if full {
+        finalize_full_output(&doc);
+    } else {
+        finalize_web_output(&doc);
+    }
+
+    Ok(doc)
+}
+
+fn apply_document_basics(doc: &Document, full: bool) {
     // Force dark theme
     let html = doc.select_single("html");
     html.set_attr("data-theme", "dark");
@@ -121,7 +132,7 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
             link.remove();
         }
 
-        link.set_attr("href", path.as_os_str().to_str().expect("can convert path"));
+        link.set_attr("href", s);
     }
 
     // Change description
@@ -133,131 +144,52 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     if full {
         title.remove();
     } else {
-        title.set_html(TITLE);
+        title.set_html(HEADING);
     }
 
     // Remove unused elements
-    let unused = doc.select("script,noscript,nav,rustdoc-search,div.sidebar-resizer");
+    let unused =
+        doc.select("script,noscript,nav,rustdoc-search,div.sidebar-resizer,rustdoc-topbar");
     unused.remove();
 
     // Change main heading
     let heading = doc.select_single("div.main-heading");
     heading.set_html(format!("<h1>{}</h1>", HEADING));
 
-    // Remove element around introduction
+    // Remove elements around introduction
     let details = doc.select_single("details.top-doc");
-    let p = doc.select("p");
-
+    let p = doc.select("details.top-doc > p");
     details.replace_with_selection(&p);
+}
 
-    // Change section headers
+fn rewrite_section_headers(doc: &Document, full: bool) {
     for header in doc.select("h2.section-header").iter() {
         let a = header.select_single("a");
         let text = header.immediate_text().to_string();
-
-        let txt = match text.as_ref() {
-            "Modules" => "Experiences",
-            "Macros" => "Personal Project",
-            "Structs" => "OSS Contributions",
-            "Enums" => "Non-technical Skills",
-            "Constants" => "Technical Skills",
-            _ => text.as_ref(),
-        };
+        let mapped = remap_section_header(&text);
 
         if full {
-            header.set_html(txt);
+            header.set_html(mapped);
         } else {
-            header.set_html(format!("{}{}", txt, a.html()));
+            header.set_html(format!("{}{}", mapped, a.html()));
         }
     }
+}
 
-    // Change list items
+fn rewrite_item_table(doc: &Document) {
     for item in doc.select("dl.item-table > dt:has(a[class])").iter() {
         let name_a = item.select_single("a");
         let name_text = name_a.immediate_text().replace("<wbr>", "");
         let description = item.next_sibling();
 
-        // Modify the name depending on the class
         if let Some(class) = name_a.attr("class") {
             let name = match class.as_ref() {
-                "mod" => {
-                    let parts = name_text.split('_').collect::<Vec<_>>();
-
-                    match parts.len() {
-                        3 if parts[2] == "current" => format!("{} - Current", parts[1]),
-                        3 => format!("{} - {}", parts[1], parts[2]),
-                        2 => parts[1].to_string(),
-                        _ => name_text.to_string(),
-                    }
-                }
+                "mod" => format_mod_name(&name_text),
                 "macro" if name_text == "create_process_w" => "CreateProcessW".to_string(),
                 "macro" => name_text.replace("_", "-"),
-                "struct" => {
-                    if name_text == "create_process_w" {
-                        "CreateProcessW".to_string()
-                    } else {
-                        let mut result = String::new();
-                        let mut first = true;
-                        for ch in name_text.chars() {
-                            if ch.is_uppercase() {
-                                if !first {
-                                    result.push('-');
-                                }
-                                result.push(ch.to_ascii_lowercase());
-                            } else {
-                                result.push(ch);
-                            }
-                            first = false;
-                        }
-                        result
-                    }
-                }
-                "enum" if name_text == "OssProjectMaintenance" => {
-                    "OSS Project Maintenance".to_string()
-                }
-                "enum" => {
-                    let mut result = String::new();
-                    let mut first = true;
-                    for ch in name_text.chars() {
-                        if ch.is_uppercase() && !first {
-                            result.push(' ');
-                        }
-                        result.push(ch);
-                        first = false;
-                    }
-                    result
-                }
-                "constant" if name_text == "OS" => name_text.to_string(),
-                "constant" => name_text
-                    .replace('_', " ")
-                    .split_whitespace()
-                    .map(|word| {
-                        let mut chars = word.chars();
-                        match chars.next() {
-                            None => String::new(),
-                            Some(f) => {
-                                let first = f.to_uppercase().to_string();
-                                let chars = chars.collect::<String>().to_lowercase();
-                                first + &chars
-                            }
-                        }
-                    })
-                    .collect::<Vec<_>>()
-                    .join(" "),
-                "trait" => {
-                    let mut result = String::new();
-                    let mut first = true;
-                    for ch in name_text.chars() {
-                        if ch.is_uppercase() && !first {
-                            result.push(' ');
-                            result.push(ch.to_ascii_lowercase());
-                        } else {
-                            result.push(ch);
-                        }
-                        first = false;
-                    }
-                    result
-                }
+                "struct" => format_struct_name(&name_text),
+                "enum" => format_enum_name(&name_text),
+                "constant" => format_constant_name(&name_text),
                 _ => name_text,
             };
 
@@ -276,38 +208,27 @@ fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
         // Remove `[Repository]` links
         desc_a.remove();
     }
+}
 
-    // Specific to `input.html`
-    if full {
-        // Remove the `traits` section from the input.html
-        let header = doc.select_single("h2[id=traits]");
-        let list = doc.select("dl.item-table:has(a[class=trait])");
+fn finalize_full_output(doc: &Document) {
+    for item in doc.select("dl.item-table > dt:has(a)").iter() {
+        let a = item.select_single("a");
+        let desc = item.next_sibling();
+        let line = format!("{} - {}", a.html(), desc.inner_html());
 
-        header.remove();
-        list.remove();
-
-        // Simplify list items
-        for item in doc.select("dl.item-table > dt:has(a)").iter() {
-            let a = item.select_single("a");
-            let desc = item.next_sibling();
-
-            if let Some(class) = a.attr("class") {
-                let line = if class.as_ref() == "trait" {
-                    a.text().to_string()
-                } else {
-                    format!("{} - {}", a.html(), desc.inner_html())
-                };
-
-                item.set_html(line);
-            };
-        }
-        doc.select("dl.item-table > dd").remove();
-    } else {
-        let section = doc.select_single("section.content");
-        section.append_html(r#"<p style="text-align:center;">PDF version available <a href="resume.pdf">here</a>.</p>"#);
+        item.set_html(line);
     }
 
-    Ok(doc)
+    doc.select("dl.item-table > dd").remove();
+}
+
+fn finalize_web_output(doc: &Document) {
+    let section = doc.select_single("section.content");
+    section.append_html(
+        r#"<p style="text-align:center; margin-top:1.5rem;">
+PDF version available <a href="resume.pdf">here</a>.
+</p>"#,
+    );
 }
 
 fn create_template() -> Result<()> {
@@ -351,4 +272,93 @@ Full version available at \url{https://yozhgoor.github.io}
     file.write_all(content.as_bytes())?;
 
     Ok(())
+}
+
+fn capitalize_first(s: &str) -> String {
+    let mut chars = s.chars();
+    match chars.next() {
+        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+        None => String::new(),
+    }
+}
+
+fn remap_section_header(text: &str) -> &str {
+    match text {
+        "Modules" => "Experiences",
+        "Macros" => "Personal Projects",
+        "Structs" => "Open-source Contributions",
+        "Enums" => "Professional Skills",
+        "Constants" => "Technical Skills",
+        _ => text,
+    }
+}
+
+fn format_mod_name(name_text: &str) -> String {
+    let parts = name_text.split('_').collect::<Vec<_>>();
+
+    match parts.len() {
+        5 => format!(
+            "{} {} - {} {}",
+            capitalize_first(parts[1]),
+            parts[2],
+            capitalize_first(parts[3]),
+            parts[4]
+        ),
+        4 if parts[3] == "current" => {
+            format!("{} {} - Current", capitalize_first(parts[1]), parts[2])
+        }
+        3 if parts[2] == "current" => format!("{} - Current", parts[1]),
+        3 => format!("{} - {}", parts[1], parts[2]),
+        2 => parts[1].to_string(),
+        _ => name_text.to_string(),
+    }
+}
+
+fn format_struct_name(name_text: &str) -> String {
+    let mut result = String::new();
+    let mut first = true;
+    for ch in name_text.chars() {
+        if ch.is_uppercase() {
+            if !first {
+                result.push('-');
+            }
+            result.push(ch.to_ascii_lowercase());
+        } else {
+            result.push(ch);
+        }
+        first = false;
+    }
+    result
+}
+
+fn format_enum_name(name_text: &str) -> String {
+    let mut result = String::new();
+    let mut first = true;
+    for ch in name_text.chars() {
+        if ch.is_uppercase() && !first {
+            result.push(' ');
+        }
+        result.push(ch);
+        first = false;
+    }
+    result
+}
+
+fn format_constant_name(name_text: &str) -> String {
+    name_text
+        .replace('_', " ")
+        .split_whitespace()
+        .map(|word| {
+            let mut chars = word.chars();
+            match chars.next() {
+                None => String::new(),
+                Some(f) => {
+                    let first = f.to_uppercase().to_string();
+                    let rest = chars.collect::<String>().to_lowercase();
+                    first + &rest
+                }
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
