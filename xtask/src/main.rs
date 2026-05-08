@@ -156,10 +156,15 @@ fn apply_document_basics(doc: &Document, full: bool) {
     let heading = doc.select_single("div.main-heading");
     heading.set_html(format!("<h1>{}</h1>", HEADING));
 
-    // Remove elements around introduction
+    // Unwrap rustdoc intro block and remove toggle summary
+    let summary = doc.select("details.top-doc > summary");
+    summary.remove();
+
     let details = doc.select_single("details.top-doc");
-    let p = doc.select("details.top-doc > p");
-    details.replace_with_selection(&p);
+    let intro = doc.select(
+        "details.top-doc > div.docblock > p, details.top-doc > div.docblock > ul, details.top-doc > div.docblock > ol",
+    );
+    details.replace_with_selection(&intro);
 }
 
 fn rewrite_section_headers(doc: &Document, full: bool) {
@@ -216,12 +221,7 @@ fn rewrite_item_table(doc: &Document, full: bool) {
 
         if class.as_deref() == Some("mod") {
             if full {
-                if tags.is_empty() {
-                    description.set_html(cleaned_description);
-                } else {
-                    let inline = render_tags_inline(&tags);
-                    description.set_html(format!("{}<br>{}", inline, cleaned_description));
-                }
+                description.set_html(cleaned_description);
             } else {
                 let tags_html = render_tags_html(&tags);
                 description.set_html(format!("{}{}", tags_html, cleaned_description));
@@ -458,8 +458,4 @@ fn render_tags_html(tags: &[String]) -> String {
         .join("");
 
     format!(r#"<div class="tags">{}</div>"#, chips)
-}
-
-fn render_tags_inline(tags: &[String]) -> String {
-    tags.join(" · ")
 }
