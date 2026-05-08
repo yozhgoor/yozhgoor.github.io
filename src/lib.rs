@@ -17,17 +17,21 @@
 
 // Jobs
 
+/// Tags: Rust, Systems, Concurrency, Data Collection, Compliance, CI/CD, Git, Cross-platform |
 /// Rust Developer (freelance) at Ystorian, building a cybersecurity platform that collects BIOS,
 /// kernel, OS, and network data in parallel across multiple systems to assess vulnerabilities and
 /// compliance, enabling reliable analysis at scale.
 pub mod exp01_jul_2022_jan_2025 {}
 
+/// Tags: Rust, Backend, Query Engine, Microservices, AWS, Data Analytics, Technical Training |
 /// Rust Developer (freelance) at Cumul.io (now Luzmo), collaborating with the CTO and backend team
 /// on a Rust rewrite of a data analytics query engine to increase performance and microservices
 /// interoperability in an AWS environment, while also leading Rust training for engineers from
 /// diverse backgrounds.
 pub mod exp02_mar_2022_jul_2022 {}
 
+/// Tags: Rust, Consulting, Open-Source, Backend, Developer Tooling, Systems, CI/CD, Git,
+/// WebAssembly |
 /// Rust Developer at RustMinded, evolving into consulting through open-source
 /// collaboration and production-focused Rust engineering across client missions.
 pub mod exp03_mar_2021_current {}

@@ -92,7 +92,7 @@ fn clean_target() -> Result<()> {
 fn manipulate_document(doc: Document, full: bool) -> Result<Document> {
     apply_document_basics(&doc, full);
     rewrite_section_headers(&doc, full);
-    rewrite_item_table(&doc);
+    rewrite_item_table(&doc, full);
 
     if full {
         finalize_full_output(&doc);
@@ -176,27 +176,35 @@ fn rewrite_section_headers(doc: &Document, full: bool) {
     }
 }
 
-fn rewrite_item_table(doc: &Document) {
+fn rewrite_item_table(doc: &Document, full: bool) {
     for item in doc.select("dl.item-table > dt:has(a[class])").iter() {
         let name_a = item.select_single("a");
         let name_text = name_a.immediate_text().replace("<wbr>", "");
         let description = item.next_sibling();
 
-        if let Some(class) = name_a.attr("class") {
-            let name = match class.as_ref() {
+        let class = name_a.attr("class").map(|c| c.to_string());
+
+        let mut tags: Vec<String> = Vec::new();
+        let mut cleaned_description = description.inner_html().to_string();
+        if class.as_deref() == Some("mod") {
+            let (parsed_tags, cleaned) = parse_tags_from_description(&cleaned_description);
+            tags = parsed_tags;
+            cleaned_description = cleaned;
+        }
+
+        if let Some(class) = class.as_deref() {
+            let name = match class {
                 "mod" => format_mod_name(&name_text),
                 "macro" if name_text == "create_process_w" => "CreateProcessW".to_string(),
-                "macro" => name_text.replace("_", "-"),
+                "macro" => name_text.replace('_', "-"),
                 "struct" => format_struct_name(&name_text),
                 "enum" => format_enum_name(&name_text),
                 "constant" => format_constant_name(&name_text),
-                _ => name_text,
+                _ => name_text.clone(),
             };
-
             name_a.set_attr("title", &name);
             name_a.set_text(&name);
         }
-
         let desc_a = description.select("a:has-text(\"[Repository]\")");
 
         if let Some(href) = desc_a.attr("href") {
@@ -204,9 +212,21 @@ fn rewrite_item_table(doc: &Document) {
         } else {
             name_a.set_attr("href", "javascript:void(0)");
         }
-
-        // Remove `[Repository]` links
         desc_a.remove();
+
+        if class.as_deref() == Some("mod") {
+            if full {
+                if tags.is_empty() {
+                    description.set_html(cleaned_description);
+                } else {
+                    let inline = render_tags_inline(&tags);
+                    description.set_html(format!("{}<br>{}", inline, cleaned_description));
+                }
+            } else {
+                let tags_html = render_tags_html(&tags);
+                description.set_html(format!("{}{}", tags_html, cleaned_description));
+            }
+        }
     }
 }
 
@@ -223,6 +243,29 @@ fn finalize_full_output(doc: &Document) {
 }
 
 fn finalize_web_output(doc: &Document) {
+    let head = doc.select_single("head");
+    head.append_html(
+        r#"<style>
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0.5rem;
+}
+.tag {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  opacity: 0.9;
+}
+dl.item-table > dt:has(a.mod) {
+  padding-top: 2rem;
+}
+</style>"#,
+    );
+
     let section = doc.select_single("section.content");
     section.append_html(
         r#"<p style="text-align:center; margin-top:1.5rem;">
@@ -361,4 +404,62 @@ fn format_constant_name(name_text: &str) -> String {
         })
         .collect::<Vec<_>>()
         .join(" ")
+}
+
+fn parse_tags_from_description(desc: &str) -> (Vec<String>, String) {
+    fn parse_line(input: &str) -> Option<(Vec<String>, String)> {
+        let normalized = input.replace("&nbsp;", " ");
+        let trimmed = normalized.trim_start();
+
+        let rest = trimmed.strip_prefix("Tags:")?;
+        let (tags_part, desc_part) = rest.split_once('|')?;
+
+        let tags = tags_part
+            .split(',')
+            .map(|s| s.trim())
+            .filter(|s| !s.is_empty())
+            .map(ToString::to_string)
+            .collect::<Vec<_>>();
+
+        Some((tags, desc_part.trim().to_string()))
+    }
+
+    if let Some(start_p) = desc.find("<p>")
+        && let Some(end_p_rel) = desc[start_p..].find("</p>")
+    {
+        let end_p = start_p + end_p_rel + "</p>".len();
+        let first_p = &desc[start_p..end_p];
+        let first_p_text = first_p.replace("<p>", "").replace("</p>", "");
+
+        if let Some((tags, cleaned_desc_text)) = parse_line(&first_p_text) {
+            let rebuilt_first_p = format!("<p>{}</p>", cleaned_desc_text);
+            let mut cleaned_html = desc.to_string();
+            cleaned_html.replace_range(start_p..end_p, &rebuilt_first_p);
+            return (tags, cleaned_html);
+        }
+    }
+
+    if let Some((tags, cleaned_desc_text)) = parse_line(desc) {
+        return (tags, cleaned_desc_text);
+    }
+
+    (Vec::new(), desc.to_string())
+}
+
+fn render_tags_html(tags: &[String]) -> String {
+    if tags.is_empty() {
+        return String::new();
+    }
+
+    let chips = tags
+        .iter()
+        .map(|t| format!(r#"<span class="tag">{}</span>"#, t))
+        .collect::<Vec<_>>()
+        .join("");
+
+    format!(r#"<div class="tags">{}</div>"#, chips)
+}
+
+fn render_tags_inline(tags: &[String]) -> String {
+    tags.join(" · ")
 }
