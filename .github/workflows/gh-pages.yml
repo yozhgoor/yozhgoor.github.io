@@ -17,17 +17,6 @@ jobs:
       - name: xtask
         run: cargo xtask
 
-      - uses: docker://pandoc/latex:3.5
-        with:
-          args: >-
-            -f html
-            -t pdf
-            --template=target/doc/template.tex
-            --output=target/doc/resume.pdf
-            target/doc/input.html
-
-      - run: rm target/doc/input.html target/doc/template.tex
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
