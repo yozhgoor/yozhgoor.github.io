@@ -80,7 +80,7 @@ fn inject_index_style(document: &Document) {
   opacity: 0.9;
 }
 dl.item-table > dt:has(a.mod) {
-  padding-top: 0.35rem;
+  padding-top: 2rem;
 }
 </style>"#,
     );

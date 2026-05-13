@@ -8,11 +8,11 @@
 //! I am an active contributor and maintainer in the Rust open-source ecosystem, and I regularly
 //! participate in community events such as meetups and conferences.
 //!
-//! [LinkedIn][linkedin] · [GitHub][github] · [Mastodon][mastodon] · [Email][email]
+//! [LinkedIn][linkedin] · [GitHub][github] · [Bluesky][bluesky] · [Email][email]
 //!
 //! [linkedin]: https://www.linkedin.com/in/yohan-boogaert
 //! [github]: https://github.com/yozhgoor
-//! [mastodon]: https://mastodon.social/@yoz@hachyderm.io
+//! [bluesky]: https://bsky.app/profile/yozhgoor.bsky.social
 //! [email]: mailto:yohan.boogaert+recruit@protonmail.com
 
 // Jobs
