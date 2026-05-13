@@ -29,8 +29,7 @@ pub mod exp01_jul_2022_jan_2025 {}
 /// environment, while also leading Rust training for engineers from diverse backgrounds.
 pub mod exp02_mar_2022_jul_2022 {}
 
-/// Tags: Rust, Consulting, Open-Source, Backend, Developer Tooling, Systems, CI/CD, Git,
-/// WebAssembly |
+/// Tags: Rust, Consulting, Open-Source, Backend, Developer Tooling, CI/CD, Git, WebAssembly |
 /// Rust Developer at RustMinded, evolving into consulting through open-source
 /// collaboration and production-focused Rust engineering across client missions.
 pub mod exp03_mar_2021_current {}
