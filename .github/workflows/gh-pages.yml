@@ -14,7 +14,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v16
 
       - name: Build Index and PDF
-        run: nix develop .#rust --command cargo xtask
+        run: nix develop . --command cargo xtask
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
