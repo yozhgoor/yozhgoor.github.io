@@ -11,22 +11,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Clean
-        run: cargo clean
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
 
       - name: xtask
         run: cargo xtask
-
-      - uses: docker://pandoc/latex:3.5
-        with:
-          args: >-
-            -f html
-            -t pdf
-            --template=target/doc/template.tex
-            --output=target/doc/resume.pdf
-            target/doc/input.html
-
-      - run: rm target/doc/input.html target/doc/template.tex
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
