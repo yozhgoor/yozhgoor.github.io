@@ -1,5 +1,5 @@
 //! Rust software developer based in Belgium, available for freelance missions and full-time
-//! opportunities in remote or hybrid settings.
+//! opportunities in remote or hybrid.
 //!
 //! I design and build production Rust software end-to-end across consulting and product
 //! environments, from systems programming and backend services to developer tooling and team
@@ -20,14 +20,13 @@
 /// Tags: Rust, Systems, Concurrency, Data Collection, Compliance, CI/CD, Git, Cross-platform |
 /// Rust Developer (freelance) at Ystorian, building a cybersecurity platform that collects BIOS,
 /// kernel, OS, and network data in parallel across multiple systems to assess vulnerabilities and
-/// compliance, enabling reliable analysis at scale.
+/// compliance.
 pub mod exp01_jul_2022_jan_2025 {}
 
 /// Tags: Rust, Backend, Query Engine, Microservices, AWS, Data Analytics, Technical Training |
-/// Rust Developer (freelance) at Cumul.io (now Luzmo), collaborating with the CTO and backend team
-/// on a Rust rewrite of a data analytics query engine to increase performance and microservices
-/// interoperability in an AWS environment, while also leading Rust training for engineers from
-/// diverse backgrounds.
+/// Rust Developer (freelance) at Cumul.io (now Luzmo), collaborating on a Rust rewrite of a data
+/// analytics query engine to increase performance and microservices interoperability in an AWS
+/// environment, while also leading Rust training for engineers from diverse backgrounds.
 pub mod exp02_mar_2022_jul_2022 {}
 
 /// Tags: Rust, Consulting, Open-Source, Backend, Developer Tooling, Systems, CI/CD, Git,
@@ -39,15 +38,14 @@ pub mod exp03_mar_2021_current {}
 // Personal Projects
 
 /// A CLI tool to spin up temporary Rust projects with pre-installed dependencies for quick
-/// prototyping and experimentation.
+/// experimentation.
 /// [\[Repository\]](<https://github.com/yozhgoor/cargo-temp>)
 #[macro_export]
 macro_rules! cargo_temp {
     () => {};
 }
 
-/// A Windows process-management library built on the Win32 API, offering an interface consistent
-/// with `std::process`.
+/// A Windows process-management library with an API similar to `std::process` built on Win32.
 /// [\[Repository\]](<https://github.com/yozhgoor/CreateProcessW>)
 #[macro_export]
 macro_rules! create_process_w {
